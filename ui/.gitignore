@@ -1,0 +1,26 @@
+# Python (Backend) cache & virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.agents/
+
+# Node / Frontend Dependencies
+node_modules/
+.pnpm-store/
+
+# Production builds & compiled outputs
+dist/
+build/
+release/
+exports/
+
+# Environment variables & local configs (jika nanti ada)
+.env
+.env.local
+
+# IDE / OS Editor files
+.vscode/
+.DS_Store
+Thumbs.db
