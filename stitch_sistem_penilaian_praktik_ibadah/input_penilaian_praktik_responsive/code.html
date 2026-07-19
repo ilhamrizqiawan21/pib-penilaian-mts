@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Penilaian - MTs Praktik Ibadah</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#191c1e",
+                    "primary-fixed": "#89f5e7",
+                    "primary-container": "#008378",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#005049",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#ecf1ff",
+                    "tertiary": "#595c5e",
+                    "on-surface": "#111c2d",
+                    "surface-container-highest": "#d8e3fb",
+                    "on-background": "#111c2d",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-tertiary-container": "#fbfdff",
+                    "surface-variant": "#d8e3fb",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "secondary-fixed": "#d3e4fe",
+                    "surface-container-high": "#dee8ff",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "surface": "#f9f9ff",
+                    "tertiary-fixed": "#e0e3e5",
+                    "inverse-surface": "#263143",
+                    "secondary": "#505f76",
+                    "on-primary-fixed": "#00201d",
+                    "secondary-container": "#d0e1fb",
+                    "surface-dim": "#claf2",
+                    "on-secondary-fixed": "#0b1c30",
+                    "outline": "#6d7a77",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#727577",
+                    "surface-container-low": "#f0f3ff",
+                    "on-primary-container": "#f4fffc",
+                    "background": "#f9f9ff",
+                    "primary": "#00685f",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed-dim": "#6bd8cb",
+                    "surface-tint": "#006a61",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#bcc9c6",
+                    "on-secondary-container": "#54647a",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-surface-variant": "#3d4947",
+                    "inverse-primary": "#6bd8cb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sidebar-width": "260px",
+                    "margin-desktop": "2rem",
+                    "margin-mobile": "1rem",
+                    "sidebar-collapsed": "80px",
+                    "table-row-height": "2.75rem",
+                    "container-max": "1440px",
+                    "gutter": "1.5rem",
+                    "component-gap": "1rem"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #F8FAFC;
+        overflow-x: hidden;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .assessment-table-container {
+        scrollbar-width: thin;
+        scrollbar-color: #bcc9c6 transparent;
+      }
+      /* Spreadsheet style input focus */
+      .score-input:focus {
+        outline: 2px solid #0D9488;
+        background-color: #F0FDFA;
+        z-index: 10;
+      }
+      /* Column headers fixed position */
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+      .sticky-col-1 {
+        position: sticky;
+        left: 0;
+        z-index: 15;
+      }
+      .sticky-col-2 {
+        position: sticky;
+        left: 50px;
+        z-index: 15;
+      }
+      @media (max-width: 768px) {
+        .sticky-col-1, .sticky-col-2 {
+            position: relative;
+            left: 0;
+        }
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Overlay for Mobile -->
+<div class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" id="sidebar-overlay"></div>
+<!-- Navigation Shell (SideNavBar) -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-container-lowest border-r border-outline-variant flex flex-col py-4 z-50 transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0" id="sidebar">
+<div class="px-6 mb-8 flex justify-between items-center">
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">MTs PIB</h1>
+<p class="font-label-md text-label-md text-secondary uppercase tracking-wider">Admin System</p>
+</div>
+<button class="lg:hidden p-2" id="close-sidebar">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-secondary p-3 flex items-center gap-3 hover:bg-surface-container hover:text-primary transition-all mx-2 rounded" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-secondary p-3 flex items-center gap-3 hover:bg-surface-container hover:text-primary transition-all mx-2 rounded" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">Periode</span>
+</a>
+<a class="text-secondary p-3 flex items-center gap-3 hover:bg-surface-container hover:text-primary transition-all mx-2 rounded" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Siswa</span>
+</a>
+<a class="text-secondary p-3 flex items-center gap-3 hover:bg-surface-container hover:text-primary transition-all mx-2 rounded" href="#">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="font-label-md text-label-md">Materi</span>
+</a>
+<!-- Active State: Penilaian -->
+<a class="bg-secondary-container text-on-secondary-container border-l-4 border-primary p-3 flex items-center gap-3 mx-2 rounded-r" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-label-md text-label-md">Penilaian</span>
+</a>
+<a class="text-secondary p-3 flex items-center gap-3 hover:bg-surface-container hover:text-primary transition-all mx-2 rounded" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant">
+<div class="flex items-center gap-3 p-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">A</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md truncate">Admin User</p>
+<p class="text-[10px] text-secondary truncate">admin@mtspib.sch.id</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="lg:ml-sidebar-width min-h-screen flex flex-col bg-background">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-4 lg:px-gutter w-full bg-surface border-b border-outline-variant sticky top-0 z-30">
+<div class="flex items-center gap-2 lg:gap-4">
+<button class="lg:hidden p-2 text-on-surface-variant" id="open-sidebar">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-sm text-[16px] lg:text-headline-sm font-bold text-on-surface truncate">MTs Praktik Ibadah</span>
+<div class="hidden sm:block h-6 w-[1px] bg-outline-variant mx-2"></div>
+<span class="hidden sm:block text-primary font-bold border-b-2 border-primary pb-1 font-title-lg text-title-lg text-sm lg:text-title-lg whitespace-nowrap">Semester Ganjil 2023/2024</span>
+</div>
+<div class="flex items-center gap-2 lg:gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-slate-200 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Teacher portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi6HJISfTdYjz6RYipcSMlhZE7lskUK_2zi538R3k5a9WOqcZlGSE8D9KAf9QN7ktMoit6_oPmS6dJ3lHOKKIDusbZ5gSlkA0yGLbS9gmZ-KVpokZ0sGnWD2xopBPyhURhuXrdoke0RUBwg2E6OCYSBfYf8x9uoYvxIdWYqzwiYAxf76kgpKluw9qvD66LJsbkGPWojqserEGQEztGAyUUQhX3_z9wEmDn4LbEamCvQ4M-t_nAJxnMnAatonkOJTs68qoSOSw0pLo"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-4 lg:p-8 flex-1">
+<div class="max-w-[1440px] mx-auto space-y-6">
+<!-- Header & Filters -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div class="space-y-1 lg:space-y-2 text-center lg:text-left">
+<h2 class="font-headline-md text-xl lg:text-headline-md text-on-surface">Input Penilaian Praktik</h2>
+<p class="font-body-md text-xs lg:text-body-md text-secondary">Silakan pilih kelas dan materi untuk memulai pengisian nilai siswa.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-end gap-3">
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-secondary">Pilih Kelas</label>
+<select class="w-full lg:w-40 bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-2 focus:ring-primary/20 focus:border-primary">
+<option>Kelas 7-A</option>
+<option>Kelas 7-B</option>
+<option>Kelas 8-A</option>
+<option>Kelas 9-A</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-secondary">Pilih Materi</label>
+<select class="w-full lg:w-56 bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-2 focus:ring-primary/20 focus:border-primary">
+<option>Praktik Shalat Fardhu</option>
+<option>Wudhu &amp; Tayammum</option>
+<option>Doa Harian &amp; Dzikir</option>
+<option>Hafalan Juz Amma</option>
+</select>
+</div>
+<div class="sm:col-span-2 lg:col-span-1">
+<button class="w-full lg:w-auto bg-primary text-white px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined !text-[18px]" data-icon="search">search</span>
+                                Tampilkan
+                            </button>
+</div>
+</div>
+</div>
+<!-- Assessment Statistics (Bento Lite) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-md text-[10px] lg:text-label-md text-secondary">Total Siswa</p>
+<p class="font-title-lg text-title-lg">32</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 bg-secondary-fixed rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+</div>
+<div>
+<p class="font-label-md text-[10px] lg:text-label-md text-secondary">Belum Dinilai</p>
+<p class="font-title-lg text-title-lg">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 bg-primary-container/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<p class="font-label-md text-[10px] lg:text-label-md text-secondary">Rerata Kelas</p>
+<p class="font-title-lg text-title-lg">84.5</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container rounded-lg flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="font-label-md text-[10px] lg:text-label-md text-secondary">Di Bawah KKM</p>
+<p class="font-title-lg text-title-lg">3</p>
+</div>
+</div>
+</div>
+<!-- Spreadsheet Main Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="p-4 border-b border-outline-variant bg-surface flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="table_chart">table_chart</span>
+<span class="font-title-lg text-sm lg:text-title-lg">Lembar Penilaian: Praktik Shalat Fardhu</span>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none text-secondary border border-outline-variant px-3 py-1.5 rounded-lg flex items-center justify-center gap-2 font-label-md text-[11px] lg:text-label-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined !text-[18px]" data-icon="upload">upload</span>
+<span class="sm:block">Impor Excel</span>
+</button>
+<button class="flex-1 sm:flex-none text-secondary border border-outline-variant px-3 py-1.5 rounded-lg flex items-center justify-center gap-2 font-label-md text-[11px] lg:text-label-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined !text-[18px]" data-icon="download">download</span>
+<span class="sm:block">Ekspor</span>
+</button>
+</div>
+</div>
+<div class="assessment-table-container overflow-x-auto max-h-[600px] relative">
+<table class="w-full border-collapse text-left min-w-[900px]">
+<thead class="sticky-header">
+<tr class="bg-slate-50 border-b border-outline-variant">
+<th class="sticky-col-1 bg-slate-50 px-4 lg:px-6 py-4 font-label-md text-label-md text-secondary uppercase z-30 w-[50px] border-r border-outline-variant">No</th>
+<th class="sticky-col-2 bg-slate-50 px-4 lg:px-6 py-4 font-label-md text-label-md text-secondary uppercase z-30 min-w-[200px] border-r border-outline-variant">Nama Siswa</th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center border-r border-outline-variant">Gerakan <br/><span class="text-[10px] font-normal lowercase">(30%)</span></th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center border-r border-outline-variant">Bacaan <br/><span class="text-[10px] font-normal lowercase">(40%)</span></th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center border-r border-outline-variant">Tartil <br/><span class="text-[10px] font-normal lowercase">(20%)</span></th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center border-r border-outline-variant">Kerapihan <br/><span class="text-[10px] font-normal lowercase">(10%)</span></th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center bg-primary/5">Nilai Akhir</th>
+<th class="px-4 py-4 font-label-md text-label-md text-secondary uppercase text-center">Catatan</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="sticky-col-1 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 text-body-sm text-secondary border-r border-outline-variant text-center">1</td>
+<td class="sticky-col-2 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 border-r border-outline-variant">
+<div class="flex flex-col">
+<span class="font-bold text-body-sm text-on-surface">Ahmad Fauzan</span>
+<span class="text-[11px] text-secondary">NIS: 12345001</span>
+</div>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="85"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="88"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="90"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="95"/>
+</td>
+<td class="px-4 py-2 text-center bg-primary/5 font-bold text-primary text-body-md">88.5</td>
+<td class="px-4 py-2 min-w-[200px]">
+<input class="w-full bg-transparent border-none text-body-sm focus:ring-0 placeholder:text-slate-300" placeholder="Catatan tambahan..." type="text"/>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="sticky-col-1 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 text-body-sm text-secondary border-r border-outline-variant text-center">2</td>
+<td class="sticky-col-2 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 border-r border-outline-variant">
+<div class="flex flex-col">
+<span class="font-bold text-body-sm text-on-surface">Budi Santoso</span>
+<span class="text-[11px] text-secondary">NIS: 12345002</span>
+</div>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="75"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="70"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="80"/>
+</td>
+<td class="p-0 border-r border-outline-variant">
+<input class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md" max="100" min="0" type="number" value="85"/>
+</td>
+<td class="px-4 py-2 text-center bg-primary/5 font-bold text-primary text-body-md">75.0</td>
+<td class="px-4 py-2 min-w-[200px]">
+<input class="w-full bg-transparent border-none text-body-sm focus:ring-0 placeholder:text-slate-300" placeholder="Catatan tambahan..." type="text"/>
+</td>
+</tr>
+<script>
+                                    const names = ["Citra Lestari", "Dewi Sartika", "Eko Prasetyo", "Fauzi Anwar", "Gita Gutawa", "Hadi Saputra", "Indah Permata"];
+                                    for(let i=0; i<names.length; i++){
+                                        const n = i+3;
+                                        document.write(`
+                                            <tr class="hover:bg-slate-50 transition-colors group">
+                                                <td class="sticky-col-1 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 text-body-sm text-secondary border-r border-outline-variant text-center">${n}</td>
+                                                <td class="sticky-col-2 bg-white group-hover:bg-slate-50 px-4 lg:px-6 py-2 border-r border-outline-variant">
+                                                    <div class="flex flex-col">
+                                                        <span class="font-bold text-body-sm text-on-surface">${names[i]}</span>
+                                                        <span class="text-[11px] text-secondary">NIS: 1234500${n}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="p-0 border-r border-outline-variant"><input type="number" value="${Math.floor(Math.random()*20)+80}" class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md"></td>
+                                                <td class="p-0 border-r border-outline-variant"><input type="number" value="${Math.floor(Math.random()*20)+75}" class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md"></td>
+                                                <td class="p-0 border-r border-outline-variant"><input type="number" value="${Math.floor(Math.random()*20)+85}" class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md"></td>
+                                                <td class="p-0 border-r border-outline-variant"><input type="number" value="${Math.floor(Math.random()*15)+85}" class="score-input w-full h-[50px] border-none text-center font-bold text-primary focus:ring-0 text-body-md"></td>
+                                                <td class="px-4 py-2 text-center bg-primary/5 font-bold text-primary text-body-md">${(Math.random()*10+85).toFixed(1)}</td>
+                                                <td class="px-4 py-2 min-w-[200px]"><input type="text" placeholder="Catatan tambahan..." class="w-full bg-transparent border-none text-body-sm focus:ring-0"></td>
+                                            </tr>
+                                        `);
+                                    }
+                                </script>
+</tbody>
+</table>
+</div>
+<!-- Sticky Footer Actions for Table -->
+<div class="p-4 border-t border-outline-variant bg-slate-50 flex flex-col sm:flex-row justify-end gap-3">
+<button class="w-full sm:w-auto bg-white border border-outline text-secondary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-slate-100 transition-colors">
+                            Reset Form
+                        </button>
+<button class="w-full sm:w-auto bg-primary text-white px-8 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined !text-[18px]" data-icon="save">save</span>
+                            Simpan Nilai
+                        </button>
+</div>
+</div>
+<!-- Guidance / Legend -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-12">
+<div class="bg-surface-container-low p-4 lg:p-6 rounded-xl border border-outline-variant space-y-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<h3 class="font-title-lg text-title-lg">Panduan Penilaian</h3>
+</div>
+<ul class="space-y-2 text-body-sm text-secondary list-disc pl-5">
+<li>Masukkan skor mentah 0-100 pada setiap kolom aspek penilaian.</li>
+<li>Sistem akan menghitung Nilai Akhir secara otomatis berdasarkan bobot.</li>
+<li>Data akan tersimpan permanen setelah menekan tombol <strong>Simpan Nilai</strong>.</li>
+<li>Warna teks <span class="text-error font-bold">merah</span> menunjukkan nilai di bawah KKM (75).</li>
+</ul>
+</div>
+<div class="bg-surface-container-low p-4 lg:p-6 rounded-xl border border-outline-variant space-y-4">
+<h3 class="font-title-lg text-title-lg text-on-surface">Keterangan Bobot</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-secondary">Gerakan</span>
+<span class="font-bold text-on-surface">30%</span>
+</div>
+<div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 30%"></div>
+</div>
+<div class="flex justify-between items-center text-body-sm pt-1">
+<span class="text-secondary">Bacaan &amp; Tartil</span>
+<span class="font-bold text-on-surface">60%</span>
+</div>
+<div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 60%"></div>
+</div>
+<div class="flex justify-between items-center text-body-sm pt-1">
+<span class="text-secondary">Lainnya</span>
+<span class="font-bold text-on-surface">10%</span>
+</div>
+<div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual Toast Notification -->
+<div class="fixed bottom-4 right-4 lg:bottom-8 lg:right-8 bg-inverse-surface text-inverse-on-surface px-4 lg:px-6 py-3 lg:py-4 rounded-xl shadow-2xl flex items-center gap-4 translate-y-32 transition-transform duration-300 z-50 max-w-[calc(100vw-2rem)]" id="save-toast">
+<div class="bg-primary-fixed text-on-primary-fixed-variant rounded-full p-1 shrink-0">
+<span class="material-symbols-outlined !text-[18px] lg:!text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-sm lg:text-label-md truncate">Berhasil Tersimpan!</span>
+<span class="text-[10px] lg:text-[11px] opacity-80 truncate">32 Nilai siswa telah diperbarui.</span>
+</div>
+</div>
+<script>
+        // Sidebar Toggle Logic
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('open-sidebar');
+        const closeBtn = document.getElementById('close-sidebar');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        openBtn.addEventListener('click', toggleSidebar);
+        closeBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Toast micro-interaction
+        document.querySelector('button.bg-primary:last-of-type').addEventListener('click', function() {
+            const toast = document.getElementById('save-toast');
+            toast.classList.remove('translate-y-32');
+            toast.classList.add('translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-32');
+                toast.classList.remove('translate-y-0');
+            }, 3000);
+        });
+
+        // Row highlighting logic
+        document.querySelectorAll('.score-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.closest('tr').classList.add('bg-primary/5');
+            });
+            input.addEventListener('blur', function() {
+                this.closest('tr').classList.remove('bg-primary/5');
+            });
+        });
+    </script>
+</body></html>
