@@ -12,9 +12,11 @@ from config import EXPORT_DIR
 from ui import theme
 from ui.components.widgets import (
     EmptyState,
-    SectionCard,
+    ModernPanel,
+    PageHero,
     TableHeader,
     TableRow,
+    StatCard,
     badge,
     danger_button,
     primary_button,
@@ -39,33 +41,52 @@ class SiswaView(ctk.CTkFrame):
         self.editing_siswa_id: int | None = None
         self.grid_columnconfigure(0, weight=1)
 
-        hero = ctk.CTkFrame(self, fg_color=theme.SURFACE_ACCENT, border_color=theme.BORDER, border_width=1, corner_radius=12)
-        hero.grid(row=0, column=0, sticky="ew", pady=(0, 18))
-        hero.grid_columnconfigure(0, weight=1)
-        ctk.CTkLabel(hero, text="Manajemen Data Siswa", font=(theme.FONT, 26, "bold"), text_color=theme.TEXT).grid(
-            row=0, column=0, sticky="w", padx=20, pady=(18, 4)
-        )
-        ctk.CTkLabel(
-            hero,
-            text="Tambah siswa, filter per kelas, dan pantau status penilaiannya.",
-            font=(theme.FONT, 14),
-            text_color=theme.TEXT_MUTED,
-        ).grid(row=1, column=0, sticky="w", padx=20, pady=(0, 18))
-        badge(hero, f"{len(self.repo.list_siswa(self.semester['id'])) if self.semester else 0} siswa", "info").grid(
-            row=0, column=1, rowspan=2, padx=20, pady=20
-        )
+        total_siswa = len(self.repo.list_siswa(self.semester["id"])) if self.semester else 0
+        PageHero(
+            self,
+            "Students",
+            "Manajemen Data Siswa",
+            "Tambah siswa, filter per kelas, import Excel, dan pantau kelengkapan penilaian dari satu layar.",
+            f"{total_siswa} siswa",
+            "info",
+        ).grid(row=0, column=0, sticky="ew", pady=(0, 18))
+
+        self.stats_frame = ctk.CTkFrame(self, fg_color=theme.BACKGROUND)
+        self.stats_frame.grid(row=1, column=0, sticky="ew", pady=(0, 18))
+        self.stats_frame.grid_columnconfigure((0, 1, 2, 3), weight=1)
+        if self.semester:
+            rekap = self.repo.get_rekap_semester(self.semester["id"])
+            lengkap = sum(1 for item in rekap if item.status == "lengkap")
+            sebagian = sum(1 for item in rekap if item.status == "sebagian")
+            belum = sum(1 for item in rekap if item.status == "belum")
+            for i, (title, value, accent, icon) in enumerate(
+                [
+                    ("Total Siswa", str(total_siswa), theme.ACCENT_MINT, "S"),
+                    ("Sudah Lengkap", str(lengkap), theme.ACCENT_BLUE, "OK"),
+                    ("Sebagian", str(sebagian), theme.WARNING_BG, "IN"),
+                    ("Belum Dinilai", str(belum), theme.ERROR_BG, "!"),
+                ]
+            ):
+                StatCard(self.stats_frame, title, value, accent, icon=icon).grid(
+                    row=0,
+                    column=i,
+                    sticky="ew",
+                    padx=(0 if i == 0 else 10, 0),
+                )
+        else:
+            self.stats_frame.grid_remove()
 
         if not self.semester:
             EmptyState(self, "Belum ada semester aktif", "Buat periode aktif sebelum menambah siswa.").grid(row=1, column=0, sticky="ew")
             return
 
-        self._form().grid(row=1, column=0, sticky="ew", pady=(0, 18))
-        self._import_card().grid(row=2, column=0, sticky="ew", pady=(0, 18))
+        self._form().grid(row=2, column=0, sticky="ew", pady=(0, 18))
+        self._import_card().grid(row=3, column=0, sticky="ew", pady=(0, 18))
         self.table_card = self._table()
-        self.table_card.grid(row=3, column=0, sticky="ew")
+        self.table_card.grid(row=4, column=0, sticky="ew")
 
     def _form(self):
-        card = SectionCard(self, "Tambah Siswa", "Masukkan data siswa untuk semester aktif.")
+        card = ModernPanel(self, "Tambah Siswa", "Masukkan data siswa untuk semester aktif.")
         card.body.grid_columnconfigure(1, weight=1)
         self.nis_var = ctk.StringVar()
         self.nama_var = ctk.StringVar()
@@ -100,7 +121,7 @@ class SiswaView(ctk.CTkFrame):
         )
 
     def _import_card(self):
-        card = SectionCard(
+        card = ModernPanel(
             self,
             "Import Excel",
             "Unduh template, isi NIS, Nama, dan Kelas, lalu impor kembali ke aplikasi.",
@@ -121,7 +142,7 @@ class SiswaView(ctk.CTkFrame):
         return card
 
     def _table(self):
-        card = SectionCard(self, "Daftar Siswa", "Gunakan pencarian dan filter untuk menemukan siswa dengan cepat.")
+        card = ModernPanel(self, "Daftar Siswa", "Gunakan pencarian dan filter untuk menemukan siswa dengan cepat.")
         filter_row = ctk.CTkFrame(card.body, fg_color=theme.SURFACE)
         filter_row.pack(fill="x", padx=16, pady=14)
         ctk.CTkLabel(filter_row, text="Filter Kelas:", font=(theme.FONT, 13, "bold"), text_color=theme.TEXT_MUTED).pack(side="left")
@@ -132,9 +153,9 @@ class SiswaView(ctk.CTkFrame):
         self.search_var.trace_add("write", lambda *_: self._render_rows())
 
         header = TableHeader(card.body, [("No", 58), ("NIS", 120), ("Nama Siswa", None), ("Kelas", 90), ("Status", 110), ("Aksi", 250)])
-        header.pack(fill="x")
+        header.pack(fill="x", padx=16, pady=(0, 6))
         self.rows_frame = ctk.CTkFrame(card.body, fg_color=theme.SURFACE)
-        self.rows_frame.pack(fill="x")
+        self.rows_frame.pack(fill="x", padx=16)
         self._render_rows()
         return card
 

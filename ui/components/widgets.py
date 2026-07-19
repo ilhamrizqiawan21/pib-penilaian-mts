@@ -14,6 +14,20 @@ def font(size: int, weight: str | None = None):
     return (theme.FONT, size) if weight is None else (theme.FONT, size, weight)
 
 
+def _accent_text(accent: str) -> str:
+    bright_accents = {
+        theme.ACCENT_MINT,
+        theme.PRIMARY_SOFT,
+        theme.PRIMARY_SOFT_2,
+        theme.ACCENT_BLUE,
+        theme.WARNING_BG,
+        theme.ERROR_BG,
+        theme.INFO_BG,
+        theme.GOLD_BG,
+    }
+    return theme.TEXT if accent.upper() in {value.upper() for value in bright_accents} else theme.SURFACE
+
+
 class StatCard(ctk.CTkFrame):
     def __init__(
         self,
@@ -30,7 +44,7 @@ class StatCard(ctk.CTkFrame):
             fg_color=theme.SURFACE,
             border_color=theme.BORDER,
             border_width=1,
-            corner_radius=theme.RADIUS_LG,
+            corner_radius=24,
             **kwargs,
         )
         self.grid_columnconfigure(1, weight=1, minsize=116)
@@ -40,15 +54,15 @@ class StatCard(ctk.CTkFrame):
             width=48,
             height=48,
             fg_color=accent,
-            corner_radius=theme.RADIUS,
-            font=font(18, "bold"),
-            text_color=theme.PRIMARY if accent != theme.PRIMARY else theme.SURFACE,
+            corner_radius=16,
+            font=font(16, "bold"),
+            text_color=_accent_text(accent),
         )
         icon.grid(row=0, column=0, rowspan=2, padx=(16, 14), pady=16)
         title_label = ctk.CTkLabel(
             self,
             text=title,
-            font=font(13, "bold"),
+            font=font(11, "bold"),
             text_color=theme.TEXT_MUTED,
             anchor="w",
             wraplength=160,
@@ -58,7 +72,7 @@ class StatCard(ctk.CTkFrame):
         ctk.CTkLabel(
             self,
             text=value,
-            font=font(24, "bold"),
+            font=font(28, "bold"),
             text_color=theme.TEXT,
             anchor="w",
         ).grid(row=1, column=1, sticky="ew", padx=(0, 14), pady=(0, 16))
@@ -70,8 +84,8 @@ class StatCard(ctk.CTkFrame):
                 text_color=theme.PRIMARY,
                 fg_color=theme.PRIMARY_SOFT,
                 corner_radius=999,
-                padx=8,
-                height=22,
+                padx=10,
+                height=26,
             ).grid(row=2, column=0, columnspan=2, padx=16, pady=(0, 14), sticky="w")
 
 
@@ -82,11 +96,11 @@ class SectionCard(ctk.CTkFrame):
             fg_color=theme.SURFACE,
             border_color=theme.BORDER,
             border_width=1,
-            corner_radius=theme.RADIUS_LG,
+            corner_radius=20,
             **kwargs,
         )
         if title or subtitle:
-            header = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=theme.RADIUS_LG)
+            header = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=20)
             header.pack(fill="x", padx=20, pady=(18, 10))
             if title:
                 ctk.CTkLabel(
@@ -106,8 +120,88 @@ class SectionCard(ctk.CTkFrame):
                     wraplength=760,
                     justify="left",
                 ).pack(anchor="w", pady=(3, 0))
-        self.body = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=theme.RADIUS_LG)
+        self.body = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=20)
         self.body.pack(fill="both", expand=True, padx=0, pady=(0, 14))
+
+
+class PageHero(ctk.CTkFrame):
+    def __init__(
+        self,
+        master,
+        eyebrow: str,
+        title: str,
+        subtitle: str,
+        trailing_text: str | None = None,
+        trailing_status: str = "info",
+        **kwargs,
+    ):
+        super().__init__(
+            master,
+            fg_color=theme.SURFACE_ACCENT,
+            border_color=theme.BORDER,
+            border_width=1,
+            corner_radius=24,
+            **kwargs,
+        )
+        self.grid_columnconfigure(0, weight=1)
+        copy = ctk.CTkFrame(self, fg_color=theme.SURFACE_ACCENT, corner_radius=24)
+        copy.grid(row=0, column=0, sticky="ew", padx=22, pady=20)
+        ctk.CTkLabel(
+            copy,
+            text=eyebrow.upper(),
+            font=font(11, "bold"),
+            text_color=theme.PRIMARY,
+            anchor="w",
+        ).pack(anchor="w")
+        ctk.CTkLabel(
+            copy,
+            text=title,
+            font=font(30, "bold"),
+            text_color=theme.TEXT,
+            anchor="w",
+        ).pack(anchor="w", pady=(3, 2))
+        ctk.CTkLabel(
+            copy,
+            text=subtitle,
+            font=font(14),
+            text_color=theme.TEXT_MUTED,
+            anchor="w",
+            wraplength=780,
+            justify="left",
+        ).pack(anchor="w")
+        if trailing_text:
+            badge(self, trailing_text, trailing_status).grid(row=0, column=1, sticky="e", padx=22, pady=22)
+
+
+class ModernPanel(ctk.CTkFrame):
+    def __init__(self, master, title: str, subtitle: str | None = None, **kwargs):
+        super().__init__(
+            master,
+            fg_color=theme.SURFACE,
+            border_color=theme.BORDER,
+            border_width=1,
+            corner_radius=24,
+            **kwargs,
+        )
+        self.grid_columnconfigure(0, weight=1)
+        header = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=24)
+        header.grid(row=0, column=0, sticky="ew", padx=20, pady=(18, 8))
+        header.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(header, text=title, font=font(20, "bold"), text_color=theme.TEXT, anchor="w").grid(
+            row=0, column=0, sticky="ew"
+        )
+        if subtitle:
+            ctk.CTkLabel(
+                header,
+                text=subtitle,
+                font=font(13),
+                text_color=theme.TEXT_MUTED,
+                anchor="w",
+                wraplength=760,
+                justify="left",
+            ).grid(row=1, column=0, sticky="ew", pady=(3, 0))
+        self.body = ctk.CTkFrame(self, fg_color=theme.SURFACE, corner_radius=24)
+        self.body.grid(row=1, column=0, sticky="nsew", padx=0, pady=(0, 16))
 
 
 class ActionBar(ctk.CTkFrame):
@@ -128,10 +222,11 @@ def primary_button(master, text: str, command=None, width: int | None = None):
         master,
         text=text,
         command=command,
-        height=theme.TOUCH_HEIGHT,
-        fg_color=theme.PRIMARY,
-        hover_color=theme.PRIMARY_HOVER,
-        corner_radius=theme.RADIUS,
+        height=52,
+        fg_color=theme.ACCENT_MINT,
+        hover_color=theme.PRIMARY_SOFT_2,
+        text_color=theme.TEXT,
+        corner_radius=999,
         font=font(13, "bold"),
         **kwargs,
     )
@@ -143,13 +238,13 @@ def secondary_button(master, text: str, command=None, width: int | None = None, 
         master,
         text=text,
         command=command,
-        height=theme.TOUCH_HEIGHT,
-        fg_color=theme.SURFACE_LOW,
-        hover_color=theme.TABLE_HEADER,
+        height=48,
+        fg_color=theme.PRIMARY_SOFT,
+        hover_color=theme.PRIMARY_SOFT_2,
         text_color=theme.TEXT,
         border_color=theme.BORDER,
         border_width=1,
-        corner_radius=theme.RADIUS,
+        corner_radius=999,
         font=font(13, "bold"),
         state=state,
         **kwargs,
@@ -162,13 +257,13 @@ def danger_button(master, text: str, command=None, width: int | None = None):
         master,
         text=text,
         command=command,
-        height=theme.TOUCH_HEIGHT,
+        height=48,
         fg_color=theme.ERROR_BG,
         hover_color="#FFC8C1",
         text_color=theme.ERROR_TEXT,
         border_color="#F3B6AF",
         border_width=1,
-        corner_radius=theme.RADIUS,
+        corner_radius=999,
         font=font(13, "bold"),
         **kwargs,
     )
@@ -180,13 +275,13 @@ def icon_button(master, text: str, command=None, width: int = 42, state: str = "
         text=text,
         command=command,
         width=width,
-        height=theme.TOUCH_HEIGHT,
-        fg_color=theme.SURFACE_LOW,
+        height=48,
+        fg_color=theme.PRIMARY_SOFT,
         hover_color=theme.PRIMARY_SOFT,
         text_color=theme.PRIMARY,
         border_color=theme.BORDER,
         border_width=1,
-        corner_radius=theme.RADIUS,
+        corner_radius=999,
         font=font(16, "bold"),
         state=state,
     )
@@ -198,12 +293,12 @@ def styled_entry(master, variable=None, placeholder: str = "", width: int | None
         master,
         textvariable=variable,
         placeholder_text=placeholder,
-        height=theme.TOUCH_HEIGHT,
-        fg_color=theme.SURFACE,
+        height=48,
+        fg_color=theme.SURFACE_RAISED,
         border_color=theme.BORDER,
         text_color=theme.TEXT,
         placeholder_text_color=theme.TEXT_SUBTLE,
-        corner_radius=theme.RADIUS,
+        corner_radius=16,
         font=font(13),
         **kwargs,
     )
@@ -216,15 +311,15 @@ def styled_option(master, values: list[str], variable, command=None, width: int 
         values=values,
         variable=variable,
         command=command,
-        height=theme.TOUCH_HEIGHT,
-        fg_color=theme.SURFACE_LOW,
-        button_color=theme.PRIMARY,
-        button_hover_color=theme.PRIMARY_HOVER,
+        height=48,
+        fg_color=theme.SURFACE_RAISED,
+        button_color=theme.ACCENT_MINT,
+        button_hover_color=theme.PRIMARY_SOFT_2,
         text_color=theme.TEXT,
         dropdown_fg_color=theme.SURFACE,
         dropdown_hover_color=theme.PRIMARY_SOFT,
         dropdown_text_color=theme.TEXT,
-        corner_radius=theme.RADIUS,
+        corner_radius=16,
         font=font(13, "bold"),
         dropdown_font=font(13),
         anchor="w",
@@ -234,7 +329,7 @@ def styled_option(master, values: list[str], variable, command=None, width: int 
 
 class TableHeader(ctk.CTkFrame):
     def __init__(self, master, columns: list[tuple[str, int | None]], **kwargs):
-        super().__init__(master, fg_color=theme.TABLE_HEADER, corner_radius=theme.RADIUS_SM, **kwargs)
+        super().__init__(master, fg_color=theme.TABLE_HEADER, corner_radius=16, **kwargs)
         for text, width in columns:
             label_kwargs = {} if width is None else {"width": width}
             ctk.CTkLabel(
@@ -252,9 +347,9 @@ class TableRow(ctk.CTkFrame):
         super().__init__(
             master,
             fg_color=theme.TABLE_ROW_ALT if index % 2 else theme.SURFACE,
-            border_color=theme.DIVIDER,
+            border_color=theme.BORDER,
             border_width=1,
-            corner_radius=theme.RADIUS_SM,
+            corner_radius=16,
             **kwargs,
         )
 
@@ -442,8 +537,8 @@ def badge(master, text: str, status: str):
         fg_color=bg,
         text_color=fg,
         corner_radius=999,
-        padx=10,
-        height=26,
+        padx=12,
+        height=30,
         font=font(11, "bold"),
     )
 

@@ -10,10 +10,9 @@ from services.penilaian_service import hitung_nilai, hitung_rata_total
 from ui import theme
 from ui.components.widgets import (
     EmptyState,
-    SectionCard,
+    ModernPanel,
+    PageHero,
     StatCard,
-    TableHeader,
-    TableRow,
     primary_button,
     secondary_button,
     show_loading,
@@ -42,18 +41,14 @@ class PenilaianView(ctk.CTkFrame):
         self.touched_entries: set[tuple[int, str]] = set()
         self.grid_columnconfigure(0, weight=1)
 
-        hero = ctk.CTkFrame(self, fg_color=theme.SURFACE_ACCENT, border_color=theme.BORDER, border_width=1, corner_radius=12)
-        hero.grid(row=0, column=0, sticky="ew", pady=(0, 18))
-        hero.grid_columnconfigure(0, weight=1)
-        ctk.CTkLabel(hero, text="Input Penilaian PIB", font=(theme.FONT, 26, "bold"), text_color=theme.TEXT).grid(
-            row=0, column=0, sticky="w", padx=20, pady=(18, 4)
-        )
-        ctk.CTkLabel(
-            hero,
-            text="Pilih satu materi dan kelas, lalu isi jumlah kesalahan Hafalan dan Praktik per siswa.",
-            font=(theme.FONT, 14),
-            text_color=theme.TEXT_MUTED,
-        ).grid(row=1, column=0, sticky="w", padx=20, pady=(0, 18))
+        PageHero(
+            self,
+            "Assessments",
+            "Input Penilaian PIB",
+            "Pilih materi dan kelas, lalu isi jumlah kesalahan Hafalan dan Praktik per siswa. Nilai dihitung otomatis.",
+            "Live input",
+            "aktif",
+        ).grid(row=0, column=0, sticky="ew", pady=(0, 18))
 
         if not self.semester or not self.kelas_list:
             EmptyState(self, "Data awal belum lengkap", "Buat semester aktif dan kelas sebelum mengisi penilaian.").grid(
@@ -70,7 +65,7 @@ class PenilaianView(ctk.CTkFrame):
         self.stats_frame = ctk.CTkFrame(self, fg_color=theme.BACKGROUND)
         self.stats_frame.grid(row=2, column=0, sticky="ew", pady=(0, 18))
         self.stats_frame.grid_columnconfigure((0, 1, 2, 3), weight=1)
-        self.table_frame = SectionCard(
+        self.table_frame = ModernPanel(
             self,
             "Lembar Penilaian Per Materi",
             "Kolom Hafalan dan Praktik berisi jumlah kesalahan. Nilai akhir dihitung otomatis.",
@@ -79,7 +74,7 @@ class PenilaianView(ctk.CTkFrame):
         self.load_table()
 
     def _toolbar(self):
-        bar = ctk.CTkFrame(self, fg_color=theme.SURFACE, border_color=theme.BORDER, border_width=1, corner_radius=theme.RADIUS)
+        bar = ctk.CTkFrame(self, fg_color=theme.SURFACE, border_color=theme.BORDER, border_width=1, corner_radius=24)
         bar.grid_columnconfigure(1, weight=1)
         bar.grid_columnconfigure(3, weight=1)
 
@@ -155,84 +150,174 @@ class PenilaianView(ctk.CTkFrame):
                 justify="left",
             ).pack(fill="x", padx=14, pady=10)
 
-        self._header_row().pack(fill="x", padx=18)
+        self._assessment_hint().pack(fill="x", padx=18, pady=(0, 10))
         for index, siswa in enumerate(self.siswa_list, start=1):
-            self._student_row(index, siswa).pack(fill="x", padx=18, pady=3)
+            self._student_row(index, siswa).pack(fill="x", padx=18, pady=7)
 
-    def _header_row(self):
-        columns = [
-            ("No", 48),
-            ("Nama Siswa", 220),
-            ("Hafalan", 110),
-            ("Nilai Hafalan", 110),
-            ("Praktik", 110),
-            ("Nilai Praktik", 110),
-            ("Rata-rata", 100),
-            ("Ketuntasan", 130),
-        ]
-        return TableHeader(self.table_frame.body, columns)
+    def _assessment_hint(self):
+        hint = ctk.CTkFrame(self.table_frame.body, fg_color=theme.PRIMARY_SOFT, corner_radius=18)
+        hint.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(
+            hint,
+            text="Setiap kartu siswa menampilkan kontrol kesalahan, preview nilai, rata-rata, dan status ketuntasan.",
+            font=(theme.FONT, 12, "bold"),
+            text_color=theme.PRIMARY,
+            anchor="w",
+            wraplength=940,
+            justify="left",
+        ).grid(row=0, column=0, sticky="ew", padx=16, pady=10)
+        return hint
 
     def _student_row(self, index: int, siswa: dict):
-        row = TableRow(self.table_frame.body, index)
-        ctk.CTkLabel(row, text=str(index), width=48, anchor="w", font=(theme.FONT, 13), text_color=theme.TEXT).pack(side="left", padx=8, pady=8)
-        ctk.CTkLabel(row, text=siswa["nama"], width=220, anchor="w", font=(theme.FONT, 13, "bold"), text_color=theme.TEXT).pack(
-            side="left", padx=8, pady=8
+        row = ctk.CTkFrame(
+            self.table_frame.body,
+            fg_color=theme.SURFACE if index % 2 else theme.TABLE_ROW_ALT,
+            border_color=theme.BORDER,
+            border_width=1,
+            corner_radius=22,
         )
-        for aspek in ("hafalan", "praktik"):
+        row.grid_columnconfigure(1, weight=1)
+
+        number = ctk.CTkLabel(
+            row,
+            text=f"{index:02}",
+            width=46,
+            height=46,
+            fg_color=theme.PRIMARY_SOFT,
+            text_color=theme.PRIMARY,
+            corner_radius=16,
+            font=(theme.FONT, 13, "bold"),
+        )
+        number.grid(row=0, column=0, rowspan=2, sticky="n", padx=(14, 12), pady=16)
+
+        identity = ctk.CTkFrame(row, fg_color="transparent")
+        identity.grid(row=0, column=1, sticky="ew", padx=(0, 10), pady=(16, 4))
+        identity.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(
+            identity,
+            text=siswa["nama"],
+            anchor="w",
+            font=(theme.FONT, 16, "bold"),
+            text_color=theme.TEXT,
+        ).grid(row=0, column=0, sticky="ew")
+        ctk.CTkLabel(
+            identity,
+            text=f"NIS {siswa.get('nis', '-')} | Kelas {siswa.get('kelas', self.kelas_var.get())}",
+            anchor="w",
+            font=(theme.FONT, 12, "bold"),
+            text_color=theme.TEXT_MUTED,
+        ).grid(row=1, column=0, sticky="ew", pady=(2, 0))
+
+        aspects = ctk.CTkFrame(row, fg_color="transparent")
+        aspects.grid(row=1, column=1, sticky="ew", padx=(0, 10), pady=(0, 14))
+        aspects.grid_columnconfigure((0, 1), weight=1)
+        for col, aspek in enumerate(("hafalan", "praktik")):
             existing = self.penilaian_map.get((siswa["id"], aspek))
             var = ctk.StringVar(value="" if existing is None else str(existing["jumlah_kesalahan"]))
             self.entry_vars[(siswa["id"], aspek)] = var
-            self._error_stepper(row, siswa["id"], aspek, var).pack(side="left", padx=8, pady=8)
-            nilai_label = ctk.CTkLabel(row, text="-", width=110, anchor="center", font=(theme.FONT, 13, "bold"), text_color=theme.PRIMARY)
-            nilai_label.pack(side="left", padx=8, pady=8)
+
+            aspect_card = ctk.CTkFrame(
+                aspects,
+                fg_color=theme.SURFACE,
+                border_color=theme.DIVIDER,
+                border_width=1,
+                corner_radius=18,
+            )
+            aspect_card.grid(row=0, column=col, sticky="ew", padx=(0 if col == 0 else 8, 8 if col == 0 else 0))
+            aspect_card.grid_columnconfigure(0, weight=1)
+            ctk.CTkLabel(
+                aspect_card,
+                text=aspek.upper(),
+                anchor="w",
+                font=(theme.FONT, 11, "bold"),
+                text_color=theme.TEXT_MUTED,
+            ).grid(row=0, column=0, sticky="ew", padx=12, pady=(10, 2))
+            self._error_stepper(aspect_card, siswa["id"], aspek, var).grid(row=1, column=0, sticky="w", padx=10, pady=(0, 10))
+            score_box = ctk.CTkFrame(aspect_card, fg_color=theme.PRIMARY_SOFT, corner_radius=16)
+            score_box.grid(row=0, column=1, rowspan=2, sticky="ns", padx=(6, 10), pady=10)
+            ctk.CTkLabel(
+                score_box,
+                text="NILAI",
+                font=(theme.FONT, 10, "bold"),
+                text_color=theme.TEXT_MUTED,
+            ).pack(padx=14, pady=(8, 0))
+            nilai_label = ctk.CTkLabel(
+                score_box,
+                text="-",
+                width=58,
+                anchor="center",
+                font=(theme.FONT, 20, "bold"),
+                text_color=theme.PRIMARY,
+            )
+            nilai_label.pack(padx=10, pady=(0, 8))
             self.preview_labels[(siswa["id"], aspek)] = nilai_label
             var.trace_add("write", lambda *_args, siswa_id=siswa["id"]: self._update_row_preview(siswa_id))
 
-        rata_label = ctk.CTkLabel(row, text="-", width=100, anchor="center", font=(theme.FONT, 13, "bold"), text_color=theme.TEXT)
-        rata_label.pack(side="left", padx=8, pady=8)
+        summary = ctk.CTkFrame(row, fg_color=theme.PRIMARY_SOFT_2, corner_radius=22, width=154)
+        summary.grid(row=0, column=2, rowspan=2, sticky="nsew", padx=(8, 14), pady=14)
+        summary.grid_propagate(False)
+        ctk.CTkLabel(
+            summary,
+            text="RATA-RATA",
+            font=(theme.FONT, 10, "bold"),
+            text_color=theme.TEXT_MUTED,
+        ).pack(padx=12, pady=(14, 0))
+        rata_label = ctk.CTkLabel(summary, text="-", font=(theme.FONT, 28, "bold"), text_color=theme.TEXT)
+        rata_label.pack(padx=12, pady=(0, 6))
         self.rata_labels[siswa["id"]] = rata_label
-        ketuntasan_label = ctk.CTkLabel(row, text="-", width=130, anchor="center", font=(theme.FONT, 12, "bold"), corner_radius=999)
-        ketuntasan_label.pack(side="left", padx=8, pady=8)
+        ketuntasan_label = ctk.CTkLabel(
+            summary,
+            text="-",
+            height=30,
+            font=(theme.FONT, 11, "bold"),
+            corner_radius=999,
+            padx=10,
+        )
+        ketuntasan_label.pack(padx=12, pady=(0, 12))
         self.ketuntasan_labels[siswa["id"]] = ketuntasan_label
         self._update_row_preview(siswa["id"])
         return row
 
     def _error_stepper(self, master, siswa_id: int, aspek: str, var: ctk.StringVar):
         enabled = aspek in self.materi_pair
-        frame = ctk.CTkFrame(master, width=110, height=46, fg_color=theme.SURFACE, border_color=theme.BORDER, border_width=1, corner_radius=theme.RADIUS)
-        frame.pack_propagate(False)
-        frame.grid_columnconfigure(0, weight=1)
-
-        value = ctk.CTkLabel(frame, textvariable=var, width=48, anchor="center", font=(theme.FONT, 14, "bold"), text_color=theme.TEXT)
-        value.grid(row=0, column=0, rowspan=2, sticky="nsew", padx=(6, 2), pady=4)
-
-        up = ctk.CTkButton(
-            frame,
-            text="+",
-            width=42,
-            height=20,
-            fg_color=theme.PRIMARY if enabled else theme.BORDER,
-            hover_color=theme.PRIMARY_HOVER if enabled else theme.BORDER,
-            text_color="white" if enabled else theme.TEXT_MUTED,
-            font=(theme.FONT, 10, "bold"),
-            command=lambda: self._step_error(siswa_id, aspek, 1),
-            state="normal" if enabled else "disabled",
-        )
-        up.grid(row=0, column=1, sticky="ew", padx=(2, 4), pady=(4, 1))
+        frame = ctk.CTkFrame(master, width=132, height=42, fg_color=theme.SURFACE_LOW, border_color=theme.BORDER, border_width=1, corner_radius=999)
+        frame.grid_propagate(False)
+        frame.grid_columnconfigure(1, weight=1)
 
         down = ctk.CTkButton(
             frame,
             text="-",
-            width=42,
-            height=20,
-            fg_color=theme.SURFACE_LOW if enabled else theme.BORDER,
-            hover_color=theme.PRIMARY_SOFT if enabled else theme.BORDER,
-            text_color=theme.TEXT if enabled else theme.TEXT_MUTED,
-            font=(theme.FONT, 10, "bold"),
+            width=36,
+            height=34,
+            fg_color=theme.SURFACE,
+            hover_color=theme.PRIMARY_SOFT,
+            text_color=theme.PRIMARY if enabled else theme.TEXT_MUTED,
+            border_color=theme.BORDER,
+            border_width=1,
+            corner_radius=999,
+            font=(theme.FONT, 15, "bold"),
             command=lambda: self._step_error(siswa_id, aspek, -1),
             state="normal" if enabled else "disabled",
         )
-        down.grid(row=1, column=1, sticky="ew", padx=(2, 4), pady=(1, 4))
+        down.grid(row=0, column=0, sticky="w", padx=(4, 2), pady=4)
+
+        value = ctk.CTkLabel(frame, textvariable=var, anchor="center", font=(theme.FONT, 16, "bold"), text_color=theme.TEXT)
+        value.grid(row=0, column=1, sticky="nsew", padx=2, pady=4)
+
+        up = ctk.CTkButton(
+            frame,
+            text="+",
+            width=36,
+            height=34,
+            fg_color=theme.ACCENT_MINT if enabled else theme.BORDER,
+            hover_color=theme.PRIMARY_SOFT_2 if enabled else theme.BORDER,
+            text_color=theme.TEXT if enabled else theme.TEXT_MUTED,
+            corner_radius=999,
+            font=(theme.FONT, 15, "bold"),
+            command=lambda: self._step_error(siswa_id, aspek, 1),
+            state="normal" if enabled else "disabled",
+        )
+        up.grid(row=0, column=2, sticky="e", padx=(2, 4), pady=4)
 
         if var.get().strip() == "":
             var.set("0" if enabled else "")

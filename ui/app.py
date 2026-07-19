@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import datetime
+
 import customtkinter as ctk
 from PIL import Image
 
@@ -46,11 +48,11 @@ class PIBApp(ctk.CTk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        self.sidebar = ctk.CTkFrame(self, width=250, fg_color=theme.SURFACE, corner_radius=0)
+        self.sidebar = ctk.CTkFrame(self, width=266, fg_color=theme.SURFACE_RAISED, corner_radius=0)
         self.sidebar.grid(row=0, column=0, rowspan=2, sticky="nsew")
         self.sidebar.grid_propagate(False)
 
-        self.header = ctk.CTkFrame(self, height=66, fg_color=theme.BACKGROUND, corner_radius=0)
+        self.header = ctk.CTkFrame(self, height=72, fg_color=theme.BACKGROUND, corner_radius=0)
         self.header.grid(row=0, column=1, sticky="ew")
         self.header.grid_propagate(False)
         self.header.grid_columnconfigure(2, weight=1)
@@ -85,8 +87,8 @@ class PIBApp(ctk.CTk):
         self.nav_indicators = {}
         sekolah = self._school_name()
 
-        brand = ctk.CTkFrame(self.sidebar, fg_color=theme.SURFACE)
-        brand.pack(fill="x", padx=16, pady=(18, 14))
+        brand = ctk.CTkFrame(self.sidebar, fg_color=theme.SURFACE_RAISED)
+        brand.pack(fill="x", padx=18, pady=(20, 16))
         brand.grid_columnconfigure(1, weight=1)
 
         if self.logo_image:
@@ -99,9 +101,9 @@ class PIBApp(ctk.CTk):
                 text="PIB",
                 width=56,
                 height=56,
-                fg_color=theme.PRIMARY,
-                text_color=theme.SURFACE,
-                corner_radius=14,
+                fg_color=theme.PRIMARY_SOFT_2,
+                text_color=theme.PRIMARY,
+                corner_radius=16,
                 font=(theme.FONT, 18, "bold"),
             ).grid(row=0, column=0, rowspan=2, sticky="nw", padx=(0, 12))
 
@@ -131,7 +133,7 @@ class PIBApp(ctk.CTk):
             anchor="w",
         ).pack(fill="x", padx=22, pady=(0, 8))
 
-        menu_frame = ctk.CTkFrame(self.sidebar, fg_color=theme.SURFACE)
+        menu_frame = ctk.CTkFrame(self.sidebar, fg_color=theme.SURFACE_RAISED)
         menu_frame.pack(fill="x", padx=10, pady=(0, 0))
 
         menu_icons = {
@@ -143,8 +145,8 @@ class PIBApp(ctk.CTk):
             "Laporan": "LP",
         }
         for label in ["Dashboard", "Periode", "Siswa", "Materi", "Penilaian", "Laporan"]:
-            row = ctk.CTkFrame(menu_frame, fg_color=theme.SURFACE, corner_radius=theme.RADIUS_LG, height=46)
-            row.pack(fill="x", padx=0, pady=4)
+            row = ctk.CTkFrame(menu_frame, fg_color=theme.SURFACE_RAISED, corner_radius=theme.RADIUS_LG, height=50)
+            row.pack(fill="x", padx=0, pady=5)
             row.pack_propagate(False)
             indicator = ctk.CTkFrame(row, width=4, height=32, fg_color=theme.SURFACE, corner_radius=10)
             indicator.pack(side="left", padx=(0, 5), pady=6)
@@ -152,10 +154,10 @@ class PIBApp(ctk.CTk):
                 row,
                 text=f"{menu_icons[label]}  {label}",
                 anchor="w",
-                height=42,
-                corner_radius=8,
-                fg_color=theme.SURFACE,
-                hover_color=theme.SURFACE_LOW,
+                height=46,
+                corner_radius=16,
+                fg_color=theme.SURFACE_RAISED,
+                hover_color=theme.PRIMARY_SOFT,
                 text_color=theme.TEXT_MUTED,
                 font=(theme.FONT, 14, "bold"),
                 command=lambda name=label: self.show_view(name),
@@ -196,13 +198,24 @@ class PIBApp(ctk.CTk):
         periode = "-"
         if semester:
             periode = f"{semester['nama']} {semester['tahun_ajaran']}"
+        today_label = datetime.now().strftime("%d/%m/%Y")
 
+        title_box = ctk.CTkFrame(self.header, fg_color=theme.BACKGROUND)
+        title_box.grid(row=0, column=0, padx=(28, 18), pady=12, sticky="w")
         ctk.CTkLabel(
-            self.header,
+            title_box,
+            text="Selamat bekerja",
+            font=(theme.FONT, 11, "bold"),
+            text_color=theme.TEXT_MUTED,
+            anchor="w",
+        ).pack(anchor="w")
+        ctk.CTkLabel(
+            title_box,
             text=sekolah,
             font=(theme.FONT, 19, "bold"),
             text_color=theme.TEXT,
-        ).grid(row=0, column=0, padx=(28, 18), pady=18, sticky="w")
+            anchor="w",
+        ).pack(anchor="w")
         ctk.CTkFrame(self.header, width=1, fg_color=theme.BORDER).grid(row=0, column=1, sticky="ns", pady=18)
         ctk.CTkLabel(
             self.header,
@@ -223,7 +236,17 @@ class PIBApp(ctk.CTk):
             padx=12,
             height=28,
             font=(theme.FONT, 12, "bold"),
-        ).grid(row=0, column=3, padx=28, pady=18, sticky="e")
+        ).grid(row=0, column=3, padx=(8, 10), pady=18, sticky="e")
+        ctk.CTkLabel(
+            self.header,
+            text=today_label,
+            fg_color=theme.SURFACE_RAISED,
+            text_color=theme.TEXT_MUTED,
+            corner_radius=999,
+            padx=12,
+            height=28,
+            font=(theme.FONT, 12, "bold"),
+        ).grid(row=0, column=4, padx=(0, 28), pady=18, sticky="e")
 
     def refresh_all(self) -> None:
         self._build_sidebar()
@@ -235,11 +258,11 @@ class PIBApp(ctk.CTk):
         for label, btn in self.nav_buttons.items():
             active = label == name
             btn.configure(
-                fg_color=theme.PRIMARY_SOFT if active else theme.SURFACE,
+                fg_color=theme.PRIMARY_SOFT_2 if active else theme.SURFACE_RAISED,
                 text_color=theme.PRIMARY if active else theme.TEXT_MUTED,
                 hover_color=theme.PRIMARY_SOFT if active else theme.SURFACE_LOW,
             )
-            self.nav_indicators[label].configure(fg_color=theme.PRIMARY if active else theme.SURFACE)
+            self.nav_indicators[label].configure(fg_color=theme.PRIMARY if active else theme.SURFACE_RAISED)
 
         clear_frame(self.content)
         view_class = {

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-fixed-variant": "#005c5e", "on-primary-fixed-variant": "#00635c", "on-secondary-fixed": "#003d3e", "on-tertiary-fixed-variant": "#003e58", "surface-dim": "#87e3e5", "on-primary-container": "#005852", error: "#b31b25", "on-tertiary-container": "#00344c", "surface-container-low": "#bafdfd", "tertiary-fixed": "#2fbcff", "inverse-primary": "#00fdec", "surface-container-lowest": "#ffffff", tertiary: "#00628a", "inverse-on-surface": "#6da7a7", "secondary-fixed-dim": "#00dcdf", "surface-container-highest": "#96ebec", "tertiary-fixed-dim": "#00aef1", "surface-container-high": "#a2f0f1", "tertiary-container": "#2fbcff", "surface-container": "#adf5f6", "secondary-fixed": "#07ecef", secondary: "#006668", "primary-container": "#00f7e6", "on-surface": "#003536", "secondary-container": "#07ecef", "surface-variant": "#96ebec", "on-tertiary": "#e8f4ff", "on-secondary": "#bdfeff", "on-surface-variant": "#286465", "on-secondary-container": "#005253", "outline-variant": "#7db7b8", outline: "#468081", surface: "#d2ffff", "on-error": "#ffefee", "on-error-container": "#570008", "surface-tint": "#006760", "error-container": "#fb5151", "surface-bright": "#d2ffff", "primary-fixed-dim": "#00e7d7", "on-tertiary-fixed": "#001a28", "on-primary": "#bffff6", primary: "#006760", "on-primary-fixed": "#00443f", background: "#d2ffff", "inverse-surface": "#001111", "on-background": "#003536", "primary-fixed": "#00f7e6", "secondary-dim": "#00595a", "tertiary-dim": "#005578", "primary-dim": "#005a53", "error-dim": "#9f0519"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"touch-target": "48px", xl: "24px", sm: "8px", xs: "4px", lg: "16px", gutter: "16px", md: "12px", xxl: "32px"}, fontFamily: {"headline-md": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "label-caps": ["Inter"], "body-sm": ["Inter"], "display-lg": ["Inter"], "body-md": ["Inter"], "title-lg": ["Inter"], headline: ["Inter"], display: ["Inter"], body: ["Inter"], label: ["Inter"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg": ["24px", {lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "label-caps": ["11px", {lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "700"}], "body-sm": ["13px", {lineHeight: "18px", fontWeight: "400"}], "display-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["14px", {lineHeight: "20px", fontWeight: "400"}], "title-lg": ["18px", {lineHeight: "24px", fontWeight: "600"}]}}}};</script>
+<style>
+        body {
+            background-color: #f7f9fc;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 214, 212, 0.4);
+        }
+        .active-scale:active {
+            transform: scale(0.97);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bec9c6;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface custom-scrollbar">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-gutter w-full h-touch-target bg-surface/94 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated school crest for Al-Qalam Academy, featuring a traditional calligraphy quill and an open book emblem, rendered in elegant Madrasah Teal and gold. The style is modern minimalist with academic serenity, set against a soft light-mode background that emphasizes professional tranquil design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-_JlWWgura2z9Y-WaVvTFLt5md-h_N4SPc-rbwAw0FZB46aPSfLGT0Sbt7SbGNzRrZJBrHQIwTsRWe_l2ksm19i2hEqWnIE3-9JLhHiy0Su_Hq9O3h1mAfKcmVVT97tJBv23ycvOK2lR8cyk3SBT-qaVLlAhTGqpDE6elyLoeza2fl_qAulJF5GL3C5IErVrVdJ6SzDqwwG28o_1dJ7kbYpKTgmHDNWLRJ29OWtbvvTBG8p8jt_Si-W2P_c2Wlj6S6tu2AghXxBME"/>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Al-Qalam Academy</h1>
+</div>
+<button class="w-touch-target h-touch-target flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors active:scale-95 duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="max-w-3xl mx-auto px-gutter pt-xl pb-32">
+<!-- Profile Section -->
+<section class="mb-xxl">
+<div class="glass-card rounded-xxl p-lg shadow-sm flex items-center gap-lg">
+<div class="relative">
+<div class="w-20 h-20 rounded-full border-4 border-primary-fixed overflow-hidden bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 48px;">account_circle</span></div>
+</div>
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md text-on-surface">Ustadz Ahmad Fauzi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Administrator Akademik</p>
+<span class="inline-flex mt-sm px-md py-xs bg-primary-container/10 text-primary font-label-caps text-label-caps rounded-full">ID: AQ-2024-081</span>
+</div>
+</div>
+</section>
+<!-- Settings Groups -->
+<div class="space-y-xl">
+<!-- Account Settings -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant px-sm mb-sm">PENGATURAN AKUN</h3>
+<div class="glass-card rounded-xxl overflow-hidden divide-y divide-outline-variant/20 shadow-sm">
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">person</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Informasi Pribadi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Detail profil, email, dan telepon</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">security</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Keamanan</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kata sandi, 2FA, dan login aktif</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Izin &amp; Privasi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kelola data dan visibilitas profil</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Application Settings -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant px-sm mb-sm">APLIKASI</h3>
+<div class="glass-card rounded-xxl overflow-hidden divide-y divide-outline-variant/20 shadow-sm">
+<div class="w-full px-lg py-md flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">dark_mode</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Mode Gelap</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sesuaikan tampilan antarmuka</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-12 h-6 bg-outline-variant/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">language</span>
+<div class="flex-1 text-left flex justify-between items-center pr-md">
+<div>
+<p class="font-title-lg text-title-lg">Bahasa</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bahasa Indonesia</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">storage</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Penyimpanan &amp; Data</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manajemen cache dan unduhan</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Support & System -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant px-sm mb-sm">DUKUNGAN</h3>
+<div class="glass-card rounded-xxl overflow-hidden divide-y divide-outline-variant/20 shadow-sm">
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">help</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Pusat Bantuan</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Panduan penggunaan dan FAQ</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full px-lg py-md flex items-center gap-md hover:bg-primary-container/5 transition-colors active:scale-[0.99] group">
+<span class="material-symbols-outlined text-primary">info</span>
+<div class="flex-1 text-left">
+<p class="font-title-lg text-title-lg">Tentang Aplikasi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Versi 2.4.0 (Build 882)</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="pt-md">
+<button class="w-full px-lg py-md flex items-center justify-center gap-sm bg-error-container/10 border border-error/20 rounded-xxl text-error font-title-lg text-title-lg hover:bg-error-container/20 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">logout</span>
+                    Keluar Sesi
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-md pb-safe bg-surface/94 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-14px_32px_rgba(15,27,45,0.14)] rounded-t-xxl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-caps text-label-caps mt-xs">Assess</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps mt-xs">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps mt-xs">Results</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-lg py-xs transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>settings</span>
+<span class="font-label-caps text-label-caps mt-xs">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', (e) => {
+                // Add ripple or haptic feedback simulation
+                console.log('Interacting with:', el.innerText || 'Icon Button');
+            });
+        });
+
+        // Handle Dark Mode Toggle simulation
+        const toggle = document.querySelector('input[type="checkbox"]');
+        if(toggle) {
+            toggle.addEventListener('change', () => {
+                if(toggle.checked) {
+                    console.log('Switching to dark mode visuals...');
+                    // Logic would normally go here to toggle document classes
+                } else {
+                    console.log('Switching to light mode visuals...');
+                }
+            });
+        }
+    </script>
+</body></html>

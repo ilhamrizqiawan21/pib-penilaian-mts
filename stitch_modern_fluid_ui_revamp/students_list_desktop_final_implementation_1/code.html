@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Al-Qalam Academy | Daftar Siswa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#6a7a78",
+                        "surface-tint": "#006a63",
+                        "on-secondary-fixed": "#002020",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#006e70",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#bef9f9",
+                        "secondary-fixed-dim": "#00dcdf",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#b3edee",
+                        "on-tertiary-container": "#006c96",
+                        "surface-container-highest": "#b3edee",
+                        "primary-container": "#00fdec",
+                        "inverse-surface": "#003738",
+                        "surface-bright": "#e2ffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "on-surface-variant": "#3a4a47",
+                        "on-primary-fixed-variant": "#00504a",
+                        "primary-fixed": "#00fdec",
+                        "on-error": "#ffffff",
+                        "background": "#e2ffff",
+                        "primary-fixed-dim": "#00decf",
+                        "primary": "#006a63",
+                        "surface-container-high": "#b8f3f4",
+                        "error": "#ba1a1a",
+                        "surface": "#e2ffff",
+                        "inverse-primary": "#00decf",
+                        "inverse-on-surface": "#c1fcfc",
+                        "secondary-fixed": "#35fafd",
+                        "surface-dim": "#aae5e5",
+                        "tertiary": "#00658e",
+                        "outline-variant": "#b9cac7",
+                        "on-secondary-fixed-variant": "#004f51",
+                        "on-primary-container": "#007169",
+                        "tertiary-container": "#c7e7ff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-low": "#c4feff",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-surface": "#002020",
+                        "on-primary-fixed": "#00201d",
+                        "secondary": "#00696b",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#2ff7fa",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-background": "#002020"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "md": "12px",
+                        "xl": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xxl": "32px",
+                        "touch-target": "48px",
+                        "lg": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2ffff;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 106, 99, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .student-row:hover {
+            background: rgba(0, 253, 236, 0.05);
+        }
+        .stats-card {
+            box-shadow: 0px 6px 20px rgba(71, 128, 129, 0.08);
+            transition: all 0.2s ease;
+        }
+        .stats-card:active {
+            transform: scale(0.98);
+            box-shadow: 0px 2px 8px rgba(71, 128, 129, 0.12);
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar (Desktop Fixed) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container-high border-r border-outline-variant/20 flex flex-col py-xl px-md z-50">
+<div class="mb-xxl">
+<h1 class="font-headline-lg text-headline-lg text-primary">Al-Qalam Academy</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Admin Dashboard</p>
+</div>
+<nav class="flex flex-col gap-sm flex-grow">
+<!-- Assessments -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 transition-all duration-200 rounded-xl active:scale-95" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-body-md text-body-md">Assessments</span>
+</a>
+<!-- Students (Active) -->
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-xl px-md py-sm font-bold transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Students</span>
+</a>
+<!-- Results -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 transition-all duration-200 rounded-xl active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Results</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm mt-auto hover:bg-surface-variant/50 transition-all duration-200 rounded-xl active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20 shadow-md">
+<div class="flex justify-between items-center h-touch-target px-xl">
+<div class="flex items-center gap-md bg-surface-container-low px-md py-xs rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Cari siswa..." type="text"/>
+</div>
+<div class="flex items-center gap-lg">
+<button class="p-xs hover:bg-surface-variant/30 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<button class="flex items-center gap-sm p-xs hover:bg-surface-variant/30 rounded-full transition-transform active:scale-90">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="font-title-lg text-title-lg text-primary mr-sm">Admin</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-touch-target min-h-screen">
+<div class="p-xl space-y-xl">
+<!-- Illustrative Banner -->
+<!-- Stats Overview -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-xl">
+<!-- Total Students -->
+<div class="stats-card bg-white p-xl rounded-xxl border border-outline-variant/20">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant">TOTAL SISWA</span>
+<div class="p-sm bg-primary-container rounded-lg">
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">32</div>
+<div class="mt-sm flex items-center text-primary gap-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="font-body-sm text-body-sm">+2 Bulan Ini</span>
+</div>
+</div>
+<!-- Average Grade -->
+<div class="stats-card bg-white p-xl rounded-xxl border border-outline-variant/20">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RATA-RATA NILAI</span>
+<div class="p-sm bg-tertiary-container rounded-lg">
+<span class="material-symbols-outlined text-tertiary">star</span>
+</div>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">88</div>
+<div class="mt-sm flex items-center text-tertiary gap-xs">
+<span class="material-symbols-outlined text-sm">auto_graph</span>
+<span class="font-body-sm text-body-sm">Peningkatan 4%</span>
+</div>
+</div>
+<!-- Academic Year (Visual Placeholder for context) -->
+<div class="stats-card bg-white p-xl rounded-xxl border border-outline-variant/20 lg:col-span-2 flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">TAHUN AJARAN</span>
+<div class="font-headline-lg text-headline-lg text-primary">2024 / 2025 Genap</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Status: Aktif</p>
+</div>
+<div class="p-xl bg-secondary-container/20 rounded-full">
+<span class="material-symbols-outlined text-secondary scale-150">calendar_month</span>
+</div>
+</div>
+</section>
+<!-- Students List Grid -->
+<section class="bg-white rounded-xxl shadow-sm border border-outline-variant/20 overflow-hidden">
+<div class="p-xl border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Daftar Siswa Aktif</h3>
+<button class="flex items-center gap-sm px-xl py-sm rounded-xl border border-outline-variant/30 text-on-surface-variant hover:bg-surface-variant/30 transition-all active:scale-95"><span class="material-symbols-outlined">filter_list</span><span>Filter</span></button><button class="bg-primary text-white px-xl py-sm rounded-xl font-bold flex items-center gap-sm hover:opacity-90 transition-all active:scale-95 shadow-lg"><span class="material-symbols-outlined">add</span><span>Tambah Siswa</span></button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant/20">
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant">ID SISWA</th>
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant">NAMA LENGKAP</th>
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant">KELAS</th>
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant text-center">NILAI RATA-RATA</th>
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+<th class="px-xl py-md font-label-caps text-label-caps text-on-surface-variant text-right">AKSI</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Student 1 -->
+<tr class="student-row transition-colors">
+<td class="px-xl py-lg font-label-caps text-label-caps text-primary">AQ2024-001</td>
+<td class="px-xl py-lg">
+<div class="font-headline-md text-headline-md text-on-surface">Ahmad Fauzan</div>
+</td>
+<td class="px-xl py-lg font-body-md text-body-md text-on-surface-variant">10-A</td>
+<td class="px-xl py-lg text-center">
+<span class="bg-primary-container text-on-primary-container px-md py-xs rounded-lg font-bold text-headline-md">92</span>
+</td>
+<td class="px-xl py-lg">
+<span class="px-md py-xs bg-primary/10 text-primary rounded-full font-label-caps text-label-caps">AKTIF</span>
+</td>
+<td class="px-xl py-lg text-right">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student 2 -->
+<tr class="student-row transition-colors">
+<td class="px-xl py-lg font-label-caps text-label-caps text-primary">AQ2024-005</td>
+<td class="px-xl py-lg">
+<div class="font-headline-md text-headline-md text-on-surface">Siti Aminah</div>
+</td>
+<td class="px-xl py-lg font-body-md text-body-md text-on-surface-variant">10-A</td>
+<td class="px-xl py-lg text-center">
+<span class="bg-primary-container text-on-primary-container px-md py-xs rounded-lg font-bold text-headline-md">95</span>
+</td>
+<td class="px-xl py-lg">
+<span class="px-md py-xs bg-primary/10 text-primary rounded-full font-label-caps text-label-caps">AKTIF</span>
+</td>
+<td class="px-xl py-lg text-right">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student 3 -->
+<tr class="student-row transition-colors">
+<td class="px-xl py-lg font-label-caps text-label-caps text-primary">AQ2024-012</td>
+<td class="px-xl py-lg">
+<div class="font-headline-md text-headline-md text-on-surface">Ibrahim Khalil</div>
+</td>
+<td class="px-xl py-lg font-body-md text-body-md text-on-surface-variant">10-B</td>
+<td class="px-xl py-lg text-center">
+<span class="bg-secondary-container text-on-secondary-container px-md py-xs rounded-lg font-bold text-headline-md">84</span>
+</td>
+<td class="px-xl py-lg">
+<span class="px-md py-xs bg-primary/10 text-primary rounded-full font-label-caps text-label-caps">AKTIF</span>
+</td>
+<td class="px-xl py-lg text-right">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student 4 -->
+<tr class="student-row transition-colors">
+<td class="px-xl py-lg font-label-caps text-label-caps text-primary">AQ2024-018</td>
+<td class="px-xl py-lg">
+<div class="font-headline-md text-headline-md text-on-surface">Maryam Zahra</div>
+</td>
+<td class="px-xl py-lg font-body-md text-body-md text-on-surface-variant">10-B</td>
+<td class="px-xl py-lg text-center">
+<span class="bg-primary-container text-on-primary-container px-md py-xs rounded-lg font-bold text-headline-md">89</span>
+</td>
+<td class="px-xl py-lg">
+<span class="px-md py-xs bg-primary/10 text-primary rounded-full font-label-caps text-label-caps">AKTIF</span>
+</td>
+<td class="px-xl py-lg text-right">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Placeholder -->
+<div class="p-xl border-t border-outline-variant/10 flex justify-between items-center bg-surface-container-low">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Menampilkan 4 dari 32 siswa</p>
+<div class="flex gap-sm">
+<button class="p-sm rounded-lg hover:bg-surface-variant/50 border border-outline-variant/30 transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-md py-sm rounded-lg bg-primary text-white font-bold">1</button>
+<button class="px-md py-sm rounded-lg hover:bg-surface-variant/50 border border-outline-variant/30">2</button>
+<button class="px-md py-sm rounded-lg hover:bg-surface-variant/50 border border-outline-variant/30">3</button>
+<button class="p-sm rounded-lg hover:bg-surface-variant/50 border border-outline-variant/30 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Interactive Layer: Simple hover effect script for rows -->
+<script>
+        document.querySelectorAll('.student-row').forEach(row => {
+            row.addEventListener('click', () => {
+                // Micro-interaction: visual feedback on row click
+                row.classList.add('bg-primary-container/20');
+                setTimeout(() => {
+                    row.classList.remove('bg-primary-container/20');
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-fixed-variant": "#005c5e", "on-primary-fixed-variant": "#00635c", "on-secondary-fixed": "#003d3e", "on-tertiary-fixed-variant": "#003e58", "surface-dim": "#87e3e5", "on-primary-container": "#005852", error: "#b31b25", "on-tertiary-container": "#00344c", "surface-container-low": "#bafdfd", "tertiary-fixed": "#2fbcff", "inverse-primary": "#00fdec", "surface-container-lowest": "#ffffff", tertiary: "#00628a", "inverse-on-surface": "#6da7a7", "secondary-fixed-dim": "#00dcdf", "surface-container-highest": "#96ebec", "tertiary-fixed-dim": "#00aef1", "surface-container-high": "#a2f0f1", "tertiary-container": "#2fbcff", "surface-container": "#adf5f6", "secondary-fixed": "#07ecef", secondary: "#006668", "primary-container": "#00f7e6", "on-surface": "#003536", "secondary-container": "#07ecef", "surface-variant": "#96ebec", "on-tertiary": "#e8f4ff", "on-secondary": "#bdfeff", "on-surface-variant": "#286465", "on-secondary-container": "#005253", "outline-variant": "#7db7b8", outline: "#468081", surface: "#d2ffff", "on-error": "#ffefee", "on-error-container": "#570008", "surface-tint": "#006760", "error-container": "#fb5151", "surface-bright": "#d2ffff", "primary-fixed-dim": "#00e7d7", "on-tertiary-fixed": "#001a28", "on-primary": "#bffff6", primary: "#006760", "on-primary-fixed": "#00443f", background: "#d2ffff", "inverse-surface": "#001111", "on-background": "#003536", "primary-fixed": "#00f7e6", "secondary-dim": "#00595a", "tertiary-dim": "#005578", "primary-dim": "#005a53", "error-dim": "#9f0519"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"touch-target": "48px", xl: "24px", sm: "8px", xs: "4px", lg: "16px", gutter: "16px", md: "12px", xxl: "32px"}, fontFamily: {"headline-md": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "label-caps": ["Inter"], "body-sm": ["Inter"], "display-lg": ["Inter"], "body-md": ["Inter"], "title-lg": ["Inter"], headline: ["Inter"], display: ["Inter"], body: ["Inter"], label: ["Inter"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg": ["24px", {lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "label-caps": ["11px", {lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "700"}], "body-sm": ["13px", {lineHeight: "18px", fontWeight: "400"}], "display-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["14px", {lineHeight: "20px", fontWeight: "400"}], "title-lg": ["18px", {lineHeight: "24px", fontWeight: "600"}]}}}};</script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #C8D6D4;
+            box-shadow: 0px 6px 20px rgba(15, 27, 45, 0.04);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-scale:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bec9c6; border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/94 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm sticky top-0 z-50 flex justify-between items-center px-gutter w-full h-16">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Al-Qalam Academy</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors active:scale-95 duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="px-gutter pt-xl pb-32">
+<!-- Dashboard Header / Class Selector -->
+<section class="mb-xl">
+<div class="flex flex-col gap-xs mb-lg">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Akademi 2024/2025</span>
+<h2 class="font-display-lg text-display-lg text-on-background">Daftar Siswa</h2>
+</div>
+<!-- Horizontal Scroll Class Chips -->
+<div class="flex gap-sm overflow-x-auto pb-sm no-scrollbar">
+<button class="px-lg py-sm rounded-full bg-primary text-on-primary font-title-lg text-title-lg active-scale shadow-md">
+                    Kelas 10A
+                </button>
+<button class="px-lg py-sm rounded-full bg-surface-container-high text-on-surface-variant font-title-lg text-title-lg active-scale border border-outline-variant/30">
+                    Kelas 10B
+                </button>
+<button class="px-lg py-sm rounded-full bg-surface-container-high text-on-surface-variant font-title-lg text-title-lg active-scale border border-outline-variant/30">
+                    Kelas 11A
+                </button>
+<button class="px-lg py-sm rounded-full bg-surface-container-high text-on-surface-variant font-title-lg text-title-lg active-scale border border-outline-variant/30">
+                    Kelas 11B
+                </button>
+</div>
+</section>
+<!-- Stats Overview Bento-ish -->
+<div class="grid grid-cols-2 gap-md mb-xl">
+<div class="glass-card p-lg rounded-xxl flex flex-col justify-between border-outline-variant/20">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Total Siswa</span>
+<div class="flex items-end gap-xs mt-sm">
+<span class="text-display-lg font-display-lg text-primary">32</span>
+<span class="text-body-sm text-on-surface-variant mb-1">Aktif</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xxl flex flex-col justify-between border-outline-variant/20">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Rata-rata Nilai</span>
+<div class="flex items-end gap-xs mt-sm">
+<span class="text-display-lg font-display-lg text-tertiary">88</span>
+<span class="text-body-sm text-on-surface-variant mb-1">A-</span>
+</div>
+</div>
+</div>
+<!-- Student List -->
+<div class="flex flex-col gap-md">
+<!-- Search Bar -->
+<div class="relative w-full mb-sm">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full h-12 pl-12 pr-4 border border-outline-variant rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none text-body-md font-body-md bg-surface-container-highest" placeholder="Cari nama siswa..." type="text"/>
+</div>
+<!-- Student Card 1 -->
+<div class="glass-card p-lg rounded-xxl flex items-center gap-lg active-scale cursor-pointer group hover:bg-white transition-all border-outline-variant/20">
+<div class="w-16 h-16 rounded-full border-4 border-primary/10 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young male student in a neat white shirt, set against a soft, sun-drenched library background with warm bokeh lighting. The style is professional and friendly, capturing a bright academic atmosphere with high-key lighting and natural, serene colors suitable for a modern Islamic academy app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCov6inZiF5ViJvabdv34TbFQsFhSDdofxsJ4DQXjOU4Lgiy0SHtEcnBLpTOyEkP19I0dn8YktEmNIFiP2OWzKlBu1Qm6X4NyGN_kz5hBYjGNuTIeR-8W6tg8pjHCBv85NXMghCtrP7Dfvlnl4zRPXVB_hFEheqAiqPG9glCIZAyTFEAE4ut1TCso4sJMFhRm8B8STZYbOJns0Ji8z9qWXKMuVhBiDONkqt8KOr626skIiQqlbef-QjbNgnTzsTxR4Y7_2lFURa57ha"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Ahmad Fauzan</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps">NIS: 240101</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-caps text-label-caps">Hafizh 5 Juz</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-display-lg text-display-lg text-primary leading-none">94</span>
+<p class="text-label-caps font-label-caps text-outline mt-1 uppercase">Sangat Baik</p>
+</div>
+</div>
+<!-- Student Card 2 -->
+<div class="glass-card p-lg rounded-xxl flex items-center gap-lg active-scale cursor-pointer group hover:bg-white transition-all border-outline-variant/20">
+<div class="w-16 h-16 rounded-full border-4 border-primary/10 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a female student wearing a light grey hijab, smiling gently in a bright modern classroom setting. The lighting is soft and airy, emphasizing a peaceful academic environment with pastel green and white tones, matching the 'Fluid Tranquility' aesthetic of Al-Qalam Academy's digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ0X0bW5rgxAJ9WujoAQaVTl8QAlsbXj8Y3obakLC1I3CQnqT2BDzKdqK7-jeSeuBiDLxtAaA2TuITcA3Wg-ygXg7pPI9Qu8heWnMtsb2l2bmUtoiDNyx9G3Tt_u_9ALq1hXqdXYxx7FpQnI0YsMe0dDhp59kIEpwFkuB-n67LOGAyTjCj8PRNLmCRpCZsJv9WnYIGAVSj0hrlEpbXpG_m6MBkMnBZWCRl2oIBW497FO0uoMCsQB-BZEdY1Ay7Go5eygELbfjPQdMC"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Siti Aminah</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps">NIS: 240102</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-caps text-label-caps">Hafizh 3 Juz</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-display-lg text-display-lg text-primary leading-none">91</span>
+<p class="text-label-caps font-label-caps text-outline mt-1 uppercase">Sangat Baik</p>
+</div>
+</div>
+<!-- Student Card 3 -->
+<div class="glass-card p-lg rounded-xxl flex items-center gap-lg active-scale cursor-pointer group hover:bg-white transition-all border-outline-variant/20">
+<div class="w-16 h-16 rounded-full border-4 border-primary/10 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a diligent male student focused on his work, wearing a light blue shirt. The background shows an architectural detail of a modern madrasah with soft geometric patterns and bright, diffused morning light. The color palette is composed of soft blues, teals, and neutrals to evoke a sense of academic focus and serenity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiCP8wxgViHs5F2FhNdmzZQXxbSEGKo_qB9A2xWhOOXgn3HGxKmn_RVEzFEVG8VmV22tyueQWGyAvODl3JSqvVGaw0EVMe9bMaWhMXoPL5VWkJLu8Bcy0gRzmnyIXg3SpsapDyShLrB_E_gfJo8nRaeAA4p4Y_uyb2iTd6bJq2OrWJGE6pPUCsmq-EtBO0kArDz7vsEPwljvl3K3KZh2lrT21ru_XVacPDZLYxgIIcUR0dzGOwRkXZJER3avDsfGa9xXTC6EEUhCIE"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Ibrahim Khalil</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps">NIS: 240103</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-caps text-label-caps">Hafizh 2 Juz</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-display-lg text-display-lg text-tertiary leading-none">85</span>
+<p class="text-label-caps font-label-caps text-outline mt-1 uppercase">Baik</p>
+</div>
+</div>
+<!-- Student Card 4 -->
+<div class="glass-card p-lg rounded-xxl flex items-center gap-lg active-scale cursor-pointer group hover:bg-white transition-all border-outline-variant/20">
+<div class="w-16 h-16 rounded-full border-4 border-primary/10 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young girl with a bright smile, wearing a cream-colored headscarf, in a contemporary educational setting with high-end glass partitions and soft wood textures. The image is captured with a shallow depth of field, highlighting the student's cheerful expression while maintaining a sophisticated, light-filled modern atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJAubPikSkVBUG0qXQFBKh9NLlqPT_i6SJXM-HRzXXrgPuhplx7jWwt6OKeduG5KZ_IwqtqgiFmH_dfkQXFhbNa7WjXlHd7_XTd-XC0vDiP28L1m2hmaDQkCt5APyVVeuwqf4hUPmwWGMZWqg8IreVVW-AMuOZ-24wtcD2ORslxfU9qLddAcrSds48R93gxyCFDHbujq-VqX_MelUj6ZSIBJsMPATi6k_M-dwGIV-GvyTdmD59b85mBT4ac1dCO5g2cVVZAPdF156O"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Maryam Zahra</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary font-label-caps text-label-caps">NIS: 240104</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-caps text-label-caps">Hafizh 4 Juz</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-display-lg text-display-lg text-primary leading-none">89</span>
+<p class="text-label-caps font-label-caps text-outline mt-1 uppercase">Baik</p>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Button (Relevance: Students context) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-[0_14_32_rgba(0,107,97,0.25)] flex items-center justify-center active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-md pb-safe bg-surface/94 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-14px_32px_rgba(15,27,45,0.14)]">
+<!-- Assess -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-label-caps text-label-caps mt-1">Assess</span>
+</a>
+<!-- Students (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-lg py-xs active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-caps text-label-caps mt-1">Students</span>
+</a>
+<!-- Results -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-caps text-label-caps mt-1">Results</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple Micro-interactions
+        document.querySelectorAll('.active-scale').forEach(el => {
+            el.addEventListener('click', () => {
+                // Future expansion: link to detail view
+                console.log('Navigating to student details...');
+            });
+        });
+
+        // Hide Bottom Nav on Scroll (Optional UX touch)
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            nav.style.transition = 'transform 0.3s ease-in-out';
+            lastScroll = currentScroll;
+        });
+    </script>
+</body></html>

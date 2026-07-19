@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Al-Qalam Academy | Assessments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#b8f3f4",
+                        "error": "#ba1a1a",
+                        "surface": "#e2ffff",
+                        "inverse-primary": "#00decf",
+                        "inverse-on-surface": "#c1fcfc",
+                        "secondary-fixed": "#35fafd",
+                        "background": "#e2ffff",
+                        "primary-fixed-dim": "#00decf",
+                        "primary": "#006a63",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-surface": "#002020",
+                        "on-primary-fixed": "#00201d",
+                        "secondary": "#00696b",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#2ff7fa",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-background": "#002020",
+                        "surface-dim": "#aae5e5",
+                        "tertiary": "#00658e",
+                        "outline-variant": "#b9cac7",
+                        "on-secondary-fixed-variant": "#004f51",
+                        "on-primary-container": "#007169",
+                        "tertiary-container": "#c7e7ff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-low": "#c4feff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#006e70",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#bef9f9",
+                        "secondary-fixed-dim": "#00dcdf",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6a7a78",
+                        "surface-tint": "#006a63",
+                        "on-secondary-fixed": "#002020",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "on-surface-variant": "#3a4a47",
+                        "on-primary-fixed-variant": "#00504a",
+                        "primary-fixed": "#00fdec",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#b3edee",
+                        "on-tertiary-container": "#006c96",
+                        "surface-container-highest": "#b3edee",
+                        "primary-container": "#00fdec",
+                        "inverse-surface": "#003738",
+                        "surface-bright": "#e2ffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "xxl": "24px"
+                    },
+                    "spacing": {
+                        "xxl": "32px",
+                        "touch-target": "48px",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "12px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            min-height: 100dvh;
+        }
+        .app-bar-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px -2px rgba(0, 106, 99, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md pb-32">
+<!-- Top App Bar -->
+<header class="bg-surface/80 app-bar-blur border-b border-outline-variant/30 sticky top-0 z-50 flex justify-between items-center px-gutter w-full h-touch-target">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px] fill-icon">school</span>
+</div>
+<h1 class="font-headline-md text-primary tracking-tight">Al-Qalam Academy</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-primary-container/20 transition-colors rounded-full active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="px-gutter pt-xl space-y-xxl">
+<!-- Dashboard Header & Summary -->
+<section class="space-y-lg">
+<div>
+<span class="font-label-caps text-label-caps text-primary/70 uppercase tracking-widest">Dashboard</span>
+<h2 class="font-display-lg text-display-lg text-on-surface">Assessment Hub</h2>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container-lowest p-lg rounded-xxl border border-outline-variant/50 flex flex-col gap-xs card-shadow">
+<span class="text-primary font-display-lg text-display-lg">12</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Ongoing Sessions</span>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xxl border border-outline-variant/50 flex flex-col gap-xs card-shadow">
+<span class="text-tertiary font-display-lg text-display-lg">8</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Scheduled Tests</span>
+</div>
+</div>
+</section>
+<!-- Ongoing Assessments -->
+<section class="space-y-lg">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-on-surface">Ongoing Assessments</h3>
+<button class="text-primary font-label-caps text-label-caps hover:underline px-sm py-xs">VIEW ALL</button>
+</div>
+<div class="space-y-md">
+<!-- Assessment Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xxl border border-outline-variant/60 flex flex-col gap-md relative overflow-hidden card-shadow">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">GRADE 10-A • ISLAMIC STUDIES</span>
+<h4 class="font-title-lg text-title-lg text-on-surface">Hifz Al-Quran Monthly Eval</h4>
+</div>
+<div class="bg-primary-container text-on-primary-container px-sm py-1 rounded-full flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-[10px] font-bold">LIVE</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-secondary-container flex items-center justify-center text-[10px] font-bold text-on-secondary-container">FA</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-tertiary-container flex items-center justify-center text-[10px] font-bold text-on-tertiary-container">HM</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-container-high flex items-center justify-center text-[10px] text-on-surface-variant font-medium">+24</div>
+</div>
+<button class="bg-primary text-on-primary px-lg h-10 rounded-full font-label-caps text-label-caps shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                            RESUME SESSION
+                        </button>
+</div>
+</div>
+<!-- Assessment Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xxl border border-outline-variant/60 flex flex-col gap-md relative overflow-hidden card-shadow">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">GRADE 8-C • ARABIC LITERATURE</span>
+<h4 class="font-title-lg text-title-lg text-on-surface">Vocabulary Fluency Test</h4>
+</div>
+<div class="bg-primary-container text-on-primary-container px-sm py-1 rounded-full flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-[10px] font-bold">LIVE</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-body-sm text-body-sm">45 mins remaining</span>
+</div>
+<button class="bg-secondary text-on-secondary px-lg h-10 rounded-full font-label-caps text-label-caps shadow-lg shadow-secondary/20 active:scale-95 transition-transform">
+                            MANAGE
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Assessments -->
+<section class="space-y-lg">
+<h3 class="font-headline-md text-on-surface">Upcoming Next Week</h3>
+<div class="space-y-md">
+<!-- Upcoming Item 1 -->
+<div class="bg-surface-container/40 p-lg rounded-xxl border border-outline-variant/30 flex items-center gap-lg active:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="w-14 h-14 rounded-xl bg-primary-container flex flex-col items-center justify-center text-on-primary-container shrink-0">
+<span class="font-bold text-headline-md leading-none">14</span>
+<span class="font-label-caps text-[9px] mt-0.5">OCT</span>
+</div>
+<div class="flex-1 min-w-0">
+<h5 class="font-title-lg text-on-surface truncate">Fiqh Essentials</h5>
+<span class="font-body-sm text-on-surface-variant">Grade 12 • 09:00 AM</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">event</span>
+</div>
+<!-- Upcoming Item 2 -->
+<div class="bg-surface-container/40 p-lg rounded-xxl border border-outline-variant/30 flex items-center gap-lg active:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="w-14 h-14 rounded-xl bg-tertiary-container flex flex-col items-center justify-center text-on-tertiary-container shrink-0">
+<span class="font-bold text-headline-md leading-none">16</span>
+<span class="font-label-caps text-[9px] mt-0.5">OCT</span>
+</div>
+<div class="flex-1 min-w-0">
+<h5 class="font-title-lg text-on-surface truncate">Tajweed Mastery</h5>
+<span class="font-body-sm text-on-surface-variant">Grade 9 • 10:30 AM</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-tertiary transition-colors">event</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 gap-md pb-lg">
+<button class="bg-primary-container/40 text-on-primary-container p-xl rounded-xxl flex flex-col items-center gap-sm active:scale-95 transition-transform border border-primary-container">
+<span class="material-symbols-outlined text-[32px]">add_circle</span>
+<span class="font-label-caps text-label-caps font-bold">NEW ASSESSMENT</span>
+</button>
+<button class="bg-secondary-container/40 text-on-secondary-container p-xl rounded-xxl flex flex-col items-center gap-sm active:scale-95 transition-transform border border-secondary-container">
+<span class="material-symbols-outlined text-[32px]">inventory_2</span>
+<span class="font-label-caps text-label-caps font-bold">ARCHIVE</span>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface/90 app-bar-blur border-t border-outline-variant/30 shadow-2xl rounded-t-xxl">
+<!-- Assess (Active) -->
+<button class="flex flex-col items-center justify-center gap-1 min-w-[64px]">
+<div class="bg-primary text-on-primary w-12 h-8 rounded-full flex items-center justify-center transition-all">
+<span class="material-symbols-outlined fill-icon text-[22px]">assignment</span>
+</div>
+<span class="font-label-caps text-[10px] text-primary font-bold">Assess</span>
+</button>
+<!-- Students -->
+<button class="flex flex-col items-center justify-center gap-1 min-w-[64px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<span class="font-label-caps text-[10px]">Students</span>
+</button>
+<!-- Results -->
+<button class="flex flex-col items-center justify-center gap-1 min-w-[64px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">leaderboard</span>
+<span class="font-label-caps text-[10px]">Results</span>
+</button>
+<!-- Settings -->
+<button class="flex flex-col items-center justify-center gap-1 min-w-[64px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-label-caps text-[10px]">Settings</span>
+</button>
+</nav>
+<script>
+        // Haptic-like interaction feedback for buttons
+        document.querySelectorAll('button, [role="button"]').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                if (!btn.classList.contains('active:scale-95')) {
+                    btn.classList.add('opacity-80');
+                }
+            });
+            btn.addEventListener('touchend', () => {
+                btn.classList.remove('opacity-80');
+            });
+        });
+    </script>
+</body></html>

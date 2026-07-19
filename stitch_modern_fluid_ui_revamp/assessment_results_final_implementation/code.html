@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-fixed-variant": "#005c5e", "on-primary-fixed-variant": "#00635c", "on-secondary-fixed": "#003d3e", "on-tertiary-fixed-variant": "#003e58", "surface-dim": "#87e3e5", "on-primary-container": "#005852", error: "#b31b25", "on-tertiary-container": "#00344c", "surface-container-low": "#bafdfd", "tertiary-fixed": "#2fbcff", "inverse-primary": "#00fdec", "surface-container-lowest": "#ffffff", tertiary: "#00628a", "inverse-on-surface": "#6da7a7", "secondary-fixed-dim": "#00dcdf", "surface-container-highest": "#96ebec", "tertiary-fixed-dim": "#00aef1", "surface-container-high": "#a2f0f1", "tertiary-container": "#2fbcff", "surface-container": "#adf5f6", "secondary-fixed": "#07ecef", secondary: "#006668", "primary-container": "#00f7e6", "on-surface": "#003536", "secondary-container": "#07ecef", "surface-variant": "#96ebec", "on-tertiary": "#e8f4ff", "on-secondary": "#bdfeff", "on-surface-variant": "#286465", "on-secondary-container": "#005253", "outline-variant": "#7db7b8", outline: "#468081", surface: "#d2ffff", "on-error": "#ffefee", "on-error-container": "#570008", "surface-tint": "#006760", "error-container": "#fb5151", "surface-bright": "#d2ffff", "primary-fixed-dim": "#00e7d7", "on-tertiary-fixed": "#001a28", "on-primary": "#bffff6", primary: "#006760", "on-primary-fixed": "#00443f", background: "#d2ffff", "inverse-surface": "#001111", "on-background": "#003536", "primary-fixed": "#00f7e6", "secondary-dim": "#00595a", "tertiary-dim": "#005578", "primary-dim": "#005a53", "error-dim": "#9f0519"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"touch-target": "48px", xl: "24px", sm: "8px", xs: "4px", lg: "16px", gutter: "16px", md: "12px", xxl: "32px"}, fontFamily: {"headline-md": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "label-caps": ["Inter"], "body-sm": ["Inter"], "display-lg": ["Inter"], "body-md": ["Inter"], "title-lg": ["Inter"], headline: ["Inter"], display: ["Inter"], body: ["Inter"], label: ["Inter"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg": ["24px", {lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "label-caps": ["11px", {lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "700"}], "body-sm": ["13px", {lineHeight: "18px", fontWeight: "400"}], "display-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800"}], "body-md": ["14px", {lineHeight: "20px", fontWeight: "400"}], "title-lg": ["18px", {lineHeight: "24px", fontWeight: "600"}]}}}};</script>
+<style>
+        body { background-color: #f7f9fc; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #C8D6D4;
+            box-shadow: 0px 6px 20px rgba(15, 27, 45, 0.04);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-scale:active {
+            transform: scale(0.96);
+            transition: transform 0.15s ease;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .progress-bar-fill {
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Top App Bar -->
+<header class="bg-surface/94 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm docked full-width top-0 sticky z-40 h-touch-target flex justify-between items-center px-gutter w-full">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A refined, minimalist academic crest for Al-Qalam Academy. The logo features a stylized quill pen forming an elegant geometric shape, set against a soft Madrasah Teal background. The visual style is modern, professional, and incorporates clean lines that reflect a balance between tradition and digital efficiency. Soft high-key lighting enhances the premium academic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByqmMhMiqI8zump_t9r3eyrk6KDh7FpqZYJ0WrAb3VHqBRfjL5lt58DAdkZ1bOHt5oXttMNThjthw0ZDYocpItjtlr6m7i2sUyKjweqTzGljlT7gvGE-lBg8FeM1g1VegDwxbrIHaT40cna6M7UHzF_WH8aFptE0O3SI5AenO7zZo_rGl8z47otuQ3eAZJ2tKcGM1Ma5ghh9-dirAi3ADhcn3QNzqcjm-K3ThgoIWZVGT24h39C7Le6wO21YVM8nvls8X-prOLRaJ9"/>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Al-Qalam Academy</h1>
+</div>
+<button class="active-scale p-sm rounded-full hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<main class="pb-32 pt-lg px-gutter max-w-2xl mx-auto space-y-lg">
+<!-- Summary Header Section -->
+<section class="space-y-xs">
+<h2 class="font-display-lg text-display-lg text-on-surface">Class Performance</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Hifdh Class - Level 4A</p>
+</section>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="glass-card p-lg rounded-xxl space-y-xs">
+<p class="font-label-caps text-label-caps text-primary opacity-70">AVERAGE SCORE</p>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-display-lg text-primary">88</span>
+<span class="font-title-lg text-title-lg text-on-surface-variant">/100</span>
+</div>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="text-[12px] font-bold">+2.4%</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xxl space-y-xs">
+<p class="font-label-caps text-label-caps text-primary opacity-70">TOTAL STUDENTS</p>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-display-lg text-primary">24</span>
+<span class="font-title-lg text-title-lg text-on-surface-variant">Active</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+<span class="text-[12px]">All Present</span>
+</div>
+</div>
+</div>
+<!-- Grade Distribution Chart (Visual Representation) -->
+<section class="glass-card p-lg rounded-xxl space-y-xl"><div class="flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface">Grade Distribution</h3>
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+</div>
+<div class="space-y-lg">
+<div class="space-y-xs">
+<div class="flex justify-between text-body-sm font-bold">
+<span class="text-on-surface">Mumtaz (90-100)</span>
+<span class="text-primary">12 Students</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="progress-bar-fill h-full bg-primary" style="width: 50%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between text-body-sm font-bold">
+<span class="text-on-surface">Jayyid Jiddan (80-89)</span>
+<span class="text-primary">8 Students</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="progress-bar-fill h-full bg-primary" style="width: 33%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between text-body-sm font-bold">
+<span class="text-on-surface">Jayyid (70-79)</span>
+<span class="text-primary">3 Students</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="progress-bar-fill h-full bg-primary" style="width: 12%"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between text-body-sm font-bold">
+<span class="text-on-surface">Maqbul (60-69)</span>
+<span class="text-primary">1 Student</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="progress-bar-fill h-full bg-primary" style="width: 5%"></div>
+</div>
+</div>
+</div></section>
+<!-- Top Performers List -->
+<section class="space-y-md">
+<div class="flex justify-between items-center px-xs">
+<h3 class="font-title-lg text-title-lg text-on-surface">Top Performers</h3>
+<button class="text-primary font-bold text-body-sm active-scale">View All</button>
+</div>
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="glass-card p-md rounded-xl flex items-center justify-between active-scale transition-all hover:bg-white/90 bg-surface-container-low">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-headline-md">
+                            ZA
+                        </div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Zaid Abdullah</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last Revision: Surah An-Nisa</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">98</p>
+<span class="bg-primary/10 text-primary px-sm py-[2px] rounded-full text-[10px] font-bold tracking-wider">MUMTAZ</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-card p-md rounded-xl flex items-center justify-between active-scale transition-all hover:bg-white/90 bg-surface-container-low">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-headline-md">
+                            FM
+                        </div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Fatima Mansoor</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last Revision: Surah Al-Ma'idah</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">96</p>
+<span class="bg-primary/10 text-primary px-sm py-[2px] rounded-full text-[10px] font-bold tracking-wider">MUMTAZ</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass-card p-md rounded-xl flex items-center justify-between active-scale transition-all hover:bg-white/90 bg-surface-container-low">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-headline-md">
+                            UK
+                        </div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Umar Khalid</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last Revision: Surah Al-A'raf</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">94</p>
+<span class="bg-primary/10 text-primary px-sm py-[2px] rounded-full text-[10px] font-bold tracking-wider">MUMTAZ</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Academic Insight Message -->
+<div class="bg-tertiary-container p-lg rounded-xxl border border-outline-variant/30 flex gap-md">
+<span class="material-symbols-outlined text-tertiary shrink-0">auto_awesome</span>
+<div>
+<p class="font-title-lg text-title-lg text-tertiary">Smart Insight</p>
+<p class="font-body-md text-body-md text-on-tertiary-container">The class has shown significant improvement in <b>Tajweed accuracy</b> this month. Consider focusing on <b>fluency (Rawan)</b> for the upcoming assessment cycle.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-md pb-safe bg-surface/94 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-14px_32px_rgba(15,27,45,0.14)] rounded-t-xxl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active-scale">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-caps text-label-caps">Assess</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active-scale">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps">Students</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-lg py-xs hover:opacity-80 transition-opacity active-scale">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-caps text-label-caps">Results</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs hover:opacity-80 transition-opacity active-scale">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+</nav>
+<script>
+        // Simple animation trigger for progress bars when loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.progress-bar-fill');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+
+        // Add active state scaling effect to all buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('scale-95');
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('scale-95');
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>
